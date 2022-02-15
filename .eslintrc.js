@@ -14,7 +14,7 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    '@typescript-eslint/no-var-requires': 0
+    '@typescript-eslint/no-var-requires': 0//error: Require statement not part of import statement 提交报错解决方案
   },
   //'__WebpackModuleApi' is not defined提交保存解决方案
   "globals":{  //与上方的rules是同级的

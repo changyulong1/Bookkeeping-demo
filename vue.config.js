@@ -1,3 +1,5 @@
+//error: Require statement not part of import statement 提交报错解决方案
+/* eslint-disable */
 const path = require("path")
 
 module.exports = {
