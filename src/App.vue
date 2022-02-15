@@ -1,22 +1,23 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <hr>
-    <router-link to="/money">笔记</router-link>|
-    <router-link to="/labels">标签</router-link>|
-    <router-link to="/statistics">记账</router-link>
   </div>
 </template>
 
 <style lang="scss">
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
+
 
 #nav {
   padding: 30px;

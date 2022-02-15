@@ -1,13 +1,16 @@
 <template>
-  <div>labels</div>
+  <div>
+    labels.vue
+    <Nav/>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "labels"
+  name: "labels",
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
