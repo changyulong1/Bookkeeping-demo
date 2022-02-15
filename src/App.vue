@@ -5,10 +5,19 @@
 </template>
 
 <style lang="scss">
+*{
+  margin: 0;
+  padding: 0;
+}
+a{
+  text-decoration: none;
+  color: #000;
+}
 body{
   margin: 0;
   padding: 0;
   box-sizing:border-box;
+  inline-height:1.5em;
 }
 
 #app {

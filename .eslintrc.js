@@ -13,7 +13,12 @@ module.exports = {
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    '@typescript-eslint/no-var-requires': 0
+  },
+  //'__WebpackModuleApi' is not defined提交报错解决方案
+  "globals":{  //与上方的rules是同级的
+    "__WebpackModuleApi": true
   },
   overrides: [
     {
