@@ -9,13 +9,15 @@
       </ul>
       <div class="newBtn">新增标签</div>
     </div>
-    <div class="exegesis">
-      <spasn class="zs">注释</spasn>
+    <label class="exegesis">
+      <span class="zs">注释</span>
       <input type="text" placeholder="请输入内容"/>
-    </div>
+    </label>
     <div class="go-money">
-      <button class="go">收入</button>
-      <button class="out">支出</button>
+      <ul>
+        <li class="selected">收入</li>
+        <li >支出</li>
+      </ul>
     </div>
     <div class="screen">
       100
@@ -51,6 +53,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/style/font.scss";
+
 .top-money {
   font-size: 14px;
   margin-bottom: 12px;
@@ -62,12 +66,15 @@ export default {
     > li {
       height: 24px;
       background: #D9D9D9;
-      border-radius: (24px/2);
+      border-radius: 12px;
       padding: 0 20px;
       margin-right: 24px;
       display: flex;
       justify-content: center;
       align-items: center;
+      &.selected{
+        background: red;
+      }
     }
   }
 
@@ -78,7 +85,6 @@ export default {
     margin-left: 16px;
     position: relative;
     color: #999999;
-
     &:before {
       content: "";
       display: block;
@@ -109,32 +115,68 @@ export default {
 }
 
 .go-money {
-  display: flex;
   background: #C4C4C4;
   height: 64px;
-  > button{
-    flex:1;
-    background: #C4C4C4;
+
+  ul {
+    display: flex;
+    justify-content: flex-start;
+    height: 100%;
+    li {
+      flex: 1;
+      background: #C4C4C4;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      &.selected{
+        &:before{
+          content: "";
+          display: block;
+          width: 100%;
+          position: absolute;
+          height: 4px;
+          background: #333333;
+          bottom: 0;
+        }
+      }
+    }
   }
+
 }
-.screen{
+
+.screen {
   text-align: right;
   line-height: 64px;
   font-size: 36px;
-  color:  #333333;
+  color: #333333;
   height: 64px;
   padding: 0 10px;
+  box-shadow: inset 0px 3px 3px $color-shadow;
 }
-.buts{
- margin-right: -10px;
-  >button{
-    width: 20vw;
+
+.buts {
+  @extend %clearfix;
+
+  > button {
+    width: 20%;
     height: 64px;
     float: left;
-    &.ok{
+    border: none;
+    &.ok {
       height: 128px;
       float: right;
     }
+    $color: #f2f2f2;
+    @for $i from 1 through 20 {
+      .item-#{$i} { width: 2em * $i; }
+      &:nth-child(1){
+        background: darken($color,4%);
+      }
+    }
+
+
   }
 
 }

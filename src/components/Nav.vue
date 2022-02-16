@@ -25,7 +25,7 @@ export default {
 @import '~@/assets/style/font.scss';
   nav{
     display: flex;
-    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    box-shadow: 0 0 3px $color-shadow;
     flex-direction: row;
     > .time{
       padding: 2px 0;
