@@ -169,14 +169,12 @@ export default {
       float: right;
     }
     $color: #f2f2f2;
+    //scssS使用for循环
     @for $i from 1 through 20 {
-      .item-#{$i} { width: 2em * $i; }
-      &:nth-child(1){
-        background: darken($color,4%);
+      &:nth-child(#{$i}){
+        background: darken($color,4%*$i);
       }
     }
-
-
   }
 
 }
