@@ -11,13 +11,16 @@
 //typeScript组件的写法
 import Vue from "vue";
 import {Component, Prop} from "vue-property-decorator";
+import {types} from "sass";
+import String = types.String;
 
 
-@Component
+@Component//component装饰器
 export default class Gomoney extends Vue {
   type = '+';
-  @Prop(Number)  propA: number | undefined
-  selectType(type) {
+  //@prop装饰器
+  @Prop(Number) XXX: number | undefined
+  selectType(type:string) {
     if (type !== "+" && type !== "-") {
       throw new Error('type is unknown');
     }
@@ -25,7 +28,8 @@ export default class Gomoney extends Vue {
   }
 
   mounted() {
-    console.log(this.propA);
+    console.log(this.XXX.YYY);
+    this.XXX.YYY;
   }
 }
 </script>
