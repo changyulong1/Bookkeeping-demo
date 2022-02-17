@@ -1,6 +1,6 @@
 <template>
-  <div class="nav-wrap">
-    <div class="content">
+  <div class="nav-wrap" >
+    <div class="content" :class="classParfir &&` ${classParfir}-content`">
       <slot></slot>
     </div>
     <Nav/>
@@ -9,10 +9,10 @@
 
 <script>
 export default {
+  props:["classParfir"],
   name: "layout"
 }
 </script>
-
 <style scoped>
 .nav-wrap{
   display: flex;
