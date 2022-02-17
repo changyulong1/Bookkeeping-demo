@@ -8,28 +8,16 @@
 </template>
 
 <script lang="ts">
-//typeScript组件的写法
 import Vue from "vue";
-import {Component, Prop} from "vue-property-decorator";
-import {types} from "sass";
-import String = types.String;
-
-
-@Component//component装饰器
+import {Component} from "vue-property-decorator";
+@Component
 export default class Gomoney extends Vue {
   type = '+';
-  //@prop装饰器
-  @Prop(Number) XXX: number | undefined
   selectType(type:string) {
     if (type !== "+" && type !== "-") {
       throw new Error('type is unknown');
     }
     this.type = type;
-  }
-
-  mounted() {
-    console.log(this.XXX.YYY);
-    this.XXX.YYY;
   }
 }
 </script>

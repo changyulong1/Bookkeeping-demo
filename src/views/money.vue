@@ -2,7 +2,7 @@
   <Layout class-parfir="layout">
    <Buts/>
     <Screen/>
-   <Gomoney :XXX="555"/>
+   <Gomoney/>
     <Exegesis/>
     <Top/>
   </Layout>
