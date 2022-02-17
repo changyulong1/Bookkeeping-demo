@@ -8,6 +8,13 @@
       <li>食</li>
       <li>住</li>
       <li>行</li>
+      <li>衣</li>
+      <li>食</li>
+      <li>住</li>
+      <li>行</li>
+      <li>衣</li>
+      <li>食</li>
+      <li>住</li>
     </ul>
   </div>
 </template>
@@ -28,11 +35,12 @@ export default {
 
   .list {
     display: flex;
-
+    flex-wrap: wrap;
     > li {
       height: 24px;
       background: #D9D9D9;
       border-radius: 12px;
+      margin-bottom: 12px;
       padding: 0 15px;
       margin-right: 24px;
       display: flex;

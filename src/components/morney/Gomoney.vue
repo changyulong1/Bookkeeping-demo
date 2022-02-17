@@ -10,16 +10,22 @@
 <script lang="ts">
 //typeScript组件的写法
 import Vue from "vue";
-import {Component} from "vue-property-decorator";
+import {Component, Prop} from "vue-property-decorator";
+
 
 @Component
-export default class Types extends Vue {
-  type = '+'
+export default class Gomoney extends Vue {
+  type = '+';
+  @Prop(Number)  propA: number | undefined
   selectType(type) {
     if (type !== "+" && type !== "-") {
-      throw new Error('type is unknown')
+      throw new Error('type is unknown');
     }
-    this.type = type
+    this.type = type;
+  }
+
+  mounted() {
+    console.log(this.propA);
   }
 }
 </script>
