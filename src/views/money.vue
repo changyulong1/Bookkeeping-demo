@@ -14,15 +14,17 @@ import Exegesis from "@/components/morney/Exegesis.vue";
 import Gomoney from "@/components/morney/Gomoney.vue";
 import Buts from "@/components/morney/Buts.vue";
 import {Component, Watch} from "vue-property-decorator";
-import model from "@/model";
+import model from "@/models/model";
+import models from "@/models/models";
 
 const dataList = model.getLanguage();
-
+const getsList = models.dataList
+console.log(getsList)
 @Component({
   components: {Buts, Gomoney, Exegesis, Top}
 })
 export default class money extends Vue {
-  gets = ['衣', '食', '住', '行'];
+  gets = getsList;
   record: RecordID = {
     tags: [], notes: '', type: "-", amount: 0, createAt: new Date()
   };
