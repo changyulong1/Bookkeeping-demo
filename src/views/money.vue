@@ -21,6 +21,7 @@ type Record = {
   notes: string
   type: string
   amount: number
+  createAt:Date
 }
 @Component({
   components: {Buts, Gomoney, Exegesis, Top}
@@ -30,7 +31,7 @@ export default class money extends Vue {
   record: Record = {
     tags: [], notes: '', type: "-", amount: 0
   };
-  recordList: Record[]=[];
+  recordList: Record[]=JSON.parse(window.localStorage.getItem('recordList') || '[]');
   getSelectData(value: string[]) {
     this.record.tags = value;
   }
@@ -48,12 +49,13 @@ export default class money extends Vue {
   }
   uplist(){
     const record2: Record = JSON.parse(JSON.stringify(this.record))
+    record2.createAt = new Date()
     this.recordList.push(record2)
     console.log(this.recordList)
   }
   @Watch('recordList')
   onRecordListChanged(){
-    window.localStorage.setItem("record",JSON.stringify(this.recordList))
+    window.localStorage.setItem("recordList",JSON.stringify(this.recordList))
   }
 }
 </script>
