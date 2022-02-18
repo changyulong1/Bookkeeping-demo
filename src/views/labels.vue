@@ -1,11 +1,11 @@
 <template>
   <layout>
-    <ol class="tagsList">
-      <li v-for="(tag,i) in tags" :key="i">
-        <span>{{ tag }}</span>
+    <div class="tagsList">
+      <router-link :to="`/labels/tag/${tag.id}`" class="tag" v-for="(tag,i) in tags" :key="i">
+        <span>{{ tag.name }}</span>
         <Icon iconName="jian"/>
-      </li>
-    </ol>
+      </router-link>
+    </div>
     <div class="creatTag-parent">
       <button class="creatTag" @click="createTag">添加标签</button>
     </div>
@@ -17,7 +17,6 @@ import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import models from "@/models/models";
 models.getLanguage()
-console.log(models.dataList)
 @Component
 export default class labels extends Vue {
   tags = models.dataList;
@@ -41,7 +40,7 @@ export default class labels extends Vue {
   font-size: 16px;
   padding-left: 16px;
 
-  > li {
+  > .tag {
     min-height: 40px;
     display: flex;
     align-items: center;

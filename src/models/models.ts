@@ -16,9 +16,10 @@ const models:RecordI = {
         return this.dataList;
     },
     create(name){
-        const names = this.getLanguage().map(data => data.id)
+        const names = this.dataList.map(data => data.name)
         if(names.indexOf(name)>=0){return 'duplicated'}
         this.dataList.push({id:name,name:name})
+        console.log(this.dataList)
         this.setLanguage()
         return 'success'
     },

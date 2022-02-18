@@ -24,7 +24,7 @@ const routes: Array<RouteConfig> = [
     component:Labels
   },
   {
-    path:"/labels/tag",
+    path:"/labels/tag/:id",
     component: TagLable
   },
   {
