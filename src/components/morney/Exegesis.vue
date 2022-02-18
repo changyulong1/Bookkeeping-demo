@@ -1,13 +1,17 @@
 <template>
   <label class="exegesis">
     <span class="zs">注释</span>
-    <input type="text" placeholder="请输入内容"/>
+    <input type="text"  v-model="value" placeholder="请输入内容"/>
   </label>
 </template>
 
 <script>
-export default {
-  name: "Exegesis"
+import Vue from "vue";
+import {Component} from "vue-property-decorator";
+
+@Component
+export default class Exegesis extends Vue {
+  value = "";
 }
 </script>
 
