@@ -18,10 +18,10 @@
       <button @click="input">8</button>
       <button @click="input">9</button>
       <button @click="input">*</button>
-      <button class="ok">ok</button>
+      <button class="ok" @click="ok">ok</button>
       <button @click="input">0</button>
       <button @click="input">.</button>
-      <button @click="input">%</button>
+      <button @click="input">=</button>
       <button @click="input">/</button>
     </div>
   </div>
@@ -44,6 +44,10 @@ export default class Buts extends Vue {
       if (this.outMoney.length === 20) {
         return;
       }
+      if(moey ==="="){
+        this.outMoney = eval(this.outMoney)
+        return
+      }
       if (this.outMoney === "0") {
         if (moey === "0") {
           return;
@@ -55,12 +59,12 @@ export default class Buts extends Vue {
         }
         return;
       }
-      if (/[+/*-/%]$/g.test(this.outMoney)) {
-        if ("+-*%./".indexOf(moey) >= 0) {
+      if (/[+/*-/]$/g.test(this.outMoney)) {
+        if ("+-*=./".indexOf(moey) >= 0) {
           return
         }
       }
-      if (/[+/*-/%]0$/g.test(this.outMoney)) {
+      if (/[+/*-/]0$/g.test(this.outMoney)) {
         if ("123456789".indexOf(moey) >= 0) {
           return;
         }
@@ -78,8 +82,16 @@ export default class Buts extends Vue {
       this.outMoney = this.outMoney.slice(0, -1)
     }
   }
-
   empty() {
+    this.outMoney = "0"
+  }
+  ok(){
+    if(this.outMoney === ''){
+      this.outMoney = "0"
+    }
+    const number = eval(this.outMoney)
+    this.$emit("updata:ok",number)
+    this.$emit("updata:recordList",number)
     this.outMoney = "0"
   }
 }
@@ -92,7 +104,7 @@ export default class Buts extends Vue {
   font-size: 36px;
   color: #333333;
   padding: 0 15px;
-  box-shadow: inset 0px 3px 3px $color-shadow;
+  box-shadow: inset 0 3px 3px $color-shadow;
 }
 
 .buts {

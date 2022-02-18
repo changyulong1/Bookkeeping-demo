@@ -1,25 +1,59 @@
 <template>
   <Layout class-parfir="layout">
-    <Buts/>
-    <Gomoney/>
-    <Exegesis/>
-    <Top :nmver-datas.sync="gets"/>
+    {{ record }}
+    <Buts @updata:ok="getok" @updata:recordList="uplist"/>
+    <Gomoney :value.sync="record.type"/>
+    <Exegesis @updata:value="getValue"/>
+    <Top :nmver-datas.sync="gets" @updata:selectDatas="getSelectData"/>
   </Layout>
 </template>
 
-<script>
-import Top from "@/components/morney/Top";
-import Exegesis from "@/components/morney/Exegesis";
-import Gomoney from "@/components/morney/Gomoney";
-import Buts from "@/components/morney/Buts";
+<script lang="ts">
+import Top from "@/components/morney/Top.vue";
+import Exegesis from "@/components/morney/Exegesis.vue";
+import Gomoney from "@/components/morney/Gomoney.vue";
+import Buts from "@/components/morney/Buts.vue";
+import {Component, Watch} from "vue-property-decorator";
+import Vue from "vue";
 
-export default {
-  name: "money",
-  components: {Buts, Gomoney, Exegesis, Top},
-  data(){
-    return {
-      gets: ['衣', '食', '住', '行']
-    }
+type Record = {
+  tags: string[]
+  notes: string
+  type: string
+  amount: number
+}
+@Component({
+  components: {Buts, Gomoney, Exegesis, Top}
+})
+export default class money extends Vue {
+  gets = ['衣', '食', '住', '行'];
+  record: Record = {
+    tags: [], notes: '', type: "-", amount: 0
+  };
+  recordList: Record[]=[];
+  getSelectData(value: string[]) {
+    this.record.tags = value;
+  }
+
+  getValue(value: string) {
+    this.record.notes = value;
+  }
+
+  setVauer(value: string) {
+    this.record.type = value;
+  }
+
+  getok(value: string) {
+    this.record.amount = parseFloat(value);
+  }
+  uplist(){
+    const record2: Record = JSON.parse(JSON.stringify(this.record))
+    this.recordList.push(record2)
+    console.log(this.recordList)
+  }
+  @Watch('recordList')
+  onRecordListChanged(){
+    window.localStorage.setItem("record",JSON.stringify(this.recordList))
   }
 }
 </script>

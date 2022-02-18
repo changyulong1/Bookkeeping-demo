@@ -28,6 +28,7 @@ export default class Top extends Vue {
     }else{
       this.selectDatas.push(label)
     }
+    this.$emit('updata:selectDatas',this.selectDatas)
   }
   createType(){
     const name = prompt("请输入新标签")
