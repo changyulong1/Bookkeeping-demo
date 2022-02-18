@@ -19,7 +19,8 @@ module.exports = {
   },
   //'__WebpackModuleApi' is not defined提交保存解决方案
   "globals":{  //与上方的rules是同级的
-    "__WebpackModuleApi": true
+    "__WebpackModuleApi": true,
+    "RecordID": true
   },
   overrides: [
     {
