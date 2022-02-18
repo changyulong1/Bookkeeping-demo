@@ -18,8 +18,7 @@ import model from "@/models/model";
 import models from "@/models/models";
 
 const dataList = model.getLanguage();
-const getsList = models.dataList
-console.log(getsList)
+const getsList = models.getLanguage()
 @Component({
   components: {Buts, Gomoney, Exegesis, Top}
 })
