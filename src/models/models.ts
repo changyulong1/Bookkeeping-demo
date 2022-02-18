@@ -1,7 +1,11 @@
 const name = "recordList";
+type dataid = {
+    id:string
+    name:string
+}
 type RecordI = {
-    dataList: string[]
-    getLanguage:()=> string[]
+    dataList: dataid[]
+    getLanguage:()=> dataid[]
     create:(name:string)=> 'success' | 'duplicated'
     setLanguage:()=>void
 }
@@ -12,8 +16,9 @@ const models:RecordI = {
         return this.dataList;
     },
     create(name){
-        if(this.dataList.indexOf(name)>=0){return 'duplicated'}
-        this.dataList.push(name)
+        const names = this.getLanguage().map(data => data.id)
+        if(names.indexOf(name)>=0){return 'duplicated'}
+        this.dataList.push({id:name,name:name})
         this.setLanguage()
         return 'success'
     },

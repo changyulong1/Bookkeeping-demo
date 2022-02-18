@@ -1,7 +1,7 @@
 <template>
-<div>
-  标签页
-</div>
+  <Layout>
+    标签页
+  </Layout>
 </template>
 
 <script lang="ts">
