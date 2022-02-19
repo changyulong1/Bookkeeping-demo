@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {Component, Prop, Watch} from "vue-property-decorator";
+import {Component, Prop} from "vue-property-decorator";
 
 @Component
 export default class Exegesis extends Vue {
@@ -15,7 +15,6 @@ export default class Exegesis extends Vue {
   @Prop() text!: string;
   @Prop({default: '请输入内容'}) plac!: string;
 
-  @Watch('value')
   onChildChanged(value: string) {
     this.$emit("updata:value", value);
   }
