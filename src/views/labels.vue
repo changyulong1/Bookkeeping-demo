@@ -7,7 +7,7 @@
       </router-link>
     </div>
     <div class="creatTag-parent">
-      <button class="creatTag" @click="createTag">添加标签</button>
+      <Button class="creatTag" @click="createTag">添加标签</Button>
     </div>
   </layout>
 </template>
@@ -16,8 +16,11 @@
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import models from "@/models/models";
+import Button from "@/components/Button.vue";
 models.getLanguage()
-@Component
+@Component({
+  components: {Button}
+})
 export default class labels extends Vue {
   tags = models.dataList;
   createTag() {
@@ -55,7 +58,6 @@ export default class labels extends Vue {
     }
   }
 }
-
 .creatTag {
   background: #767676;
   color: #FFFFFF;
@@ -63,12 +65,10 @@ export default class labels extends Vue {
   border: none;
   height: 40px;
   padding: 0 16px;
-
   &-parent {
     text-align: center;
     padding: 16px;
     margin: 44-16px;
   }
 }
-
 </style>
