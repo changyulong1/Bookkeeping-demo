@@ -1,13 +1,13 @@
 <template>
   <Layout>
     <div class="newTag">
-      <Icon class="left" iconName="left"></Icon>
+      <Icon class="left" iconName="left" @click.native="to"></Icon>
       <span>编辑标签</span>
       <div class="right"></div>
     </div>
     <Exegesis :value="tag.name" @updata:value="updateTag" class="creatTag" text="标签名" plac="衣"></Exegesis>
     <div class="button-parent">
-      <Button>删除标签</Button>
+      <Button @click="remove">删除标签</Button>
     </div>
   </Layout>
 </template>
@@ -18,6 +18,7 @@ import {Component} from "vue-property-decorator";
 import models from "@/models/models";
 import Exegesis from "@/components/morney/Exegesis.vue";
 import Button from "@/components/Button.vue";
+
 @Component({
   components: {Button, Exegesis}
 })
@@ -36,9 +37,19 @@ export default class TagLable extends Vue {
   }
 
   updateTag(name: string) {
-    if(this.tag){
-       models.update(this.tag.id,name)
+    if (this.tag) {
+      models.update(this.tag.id, name);
     }
+  }
+
+  remove() {
+    if (this.tag) {
+      console.log(666)
+      models.remove(this.tag.id);
+    }
+  }
+  to(){
+    this.$router.back()
   }
 }
 </script>
