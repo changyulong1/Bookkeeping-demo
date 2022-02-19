@@ -1,3 +1,5 @@
+import createId from "@/lid/createId";
+
 const name = "tagList";
 type dataid = {
     id: string
@@ -9,7 +11,7 @@ type RecordI = {
     create: (name: string) => 'success' | 'duplicated'
     setLanguage: () => void
     update: (id: string, name: string) => string
-    remove: (id: string) => string
+    remove: (id: string) => boolean
 }
 const models: RecordI = {
     dataList: [],
@@ -23,7 +25,8 @@ const models: RecordI = {
         if (names.indexOf(name) >= 0) {
             return 'duplicated';
         }
-        this.dataList.push({id: name, name: name});
+        const id = createId().toString()
+        this.dataList.push({id: id, name: name});
         console.log(this.dataList);
         this.setLanguage();
         return 'success';
@@ -58,7 +61,7 @@ const models: RecordI = {
         }
         this.dataList.splice(index, 1);
         this.setLanguage()
-        return "删除成功";
+        return true;
     },
     setLanguage() {
         window.localStorage.setItem(name, JSON.stringify(this.dataList));

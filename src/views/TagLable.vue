@@ -44,8 +44,9 @@ export default class TagLable extends Vue {
 
   remove() {
     if (this.tag) {
-      console.log(666)
-      models.remove(this.tag.id);
+      if(models.remove(this.tag.id)){
+        this.$router.back()
+      }
     }
   }
   to(){
