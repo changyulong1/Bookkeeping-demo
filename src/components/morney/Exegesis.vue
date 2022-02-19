@@ -1,7 +1,7 @@
 <template>
   <label class="exegesis">
     <span class="zs">{{ text }}</span>
-    <input type="text"  v-model="value"  :placeholder="plac"/>
+    <input type="text" :value="value" @input="onChildChanged($event.target.value)"  :placeholder="plac"/>
   </label>
 </template>
 
@@ -11,12 +11,13 @@ import {Component, Prop, Watch} from "vue-property-decorator";
 
 @Component
 export default class Exegesis extends Vue {
-  value = "";
-  @Prop() text!:string;
-  @Prop({default:'请输入内容'}) plac!:string
+  @Prop({default:''}) value!: string;
+  @Prop() text!: string;
+  @Prop({default: '请输入内容'}) plac!: string;
+
   @Watch('value')
-  onChildChanged(value:string){
-    this.$emit("updata:value",value)
+  onChildChanged(value: string) {
+    this.$emit("updata:value", value);
   }
 }
 </script>

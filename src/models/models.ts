@@ -1,4 +1,4 @@
-const name = "recordList";
+const name = "tagList";
 type dataid = {
     id:string
     name:string
@@ -17,6 +17,7 @@ const models:RecordI = {
     },
     create(name){
         const names = this.dataList.map(data => data.name)
+        console.log(names)
         if(names.indexOf(name)>=0){return 'duplicated'}
         this.dataList.push({id:name,name:name})
         console.log(this.dataList)

@@ -5,7 +5,7 @@
       <span>编辑标签</span>
       <div class="right"></div>
     </div>
-    <Exegesis class="creatTag" text="标签名" plac="衣"></Exegesis>
+    <Exegesis  class="creatTag" text="标签名" plac="衣"></Exegesis>
     <div class="button-parent">
       <Button>删除标签</Button>
     </div>
@@ -18,6 +18,7 @@ import {Component} from "vue-property-decorator";
 import models from "@/models/models";
 import Exegesis from "@/components/morney/Exegesis.vue";
 import Button from "@/components/Button.vue";
+
 @Component({
   components: {Button, Exegesis}
 })
@@ -35,26 +36,29 @@ export default class TagLable extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-  .newTag{
-    display: flex;
-    font-size: 16px;
-    align-items: center;
-    justify-content: space-between;
-    background: #FFFFFF;
-    padding: 12px 20px;
-    >.left,>.right{
-      width: 24px;
-      height: 24px;
-    }
+.newTag {
+  display: flex;
+  font-size: 16px;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFFFF;
+  padding: 12px 20px;
+
+  > .left, > .right {
+    width: 24px;
+    height: 24px;
   }
-  .creatTag{
-    background: #FFFFFF;
-    height: 44px;
-    margin-top: 8px;
-  }
-  .button-parent{
-    text-align: center;
-    padding: 16px;
-    margin-top: 44-16px;
-  }
+}
+
+.creatTag {
+  background: #FFFFFF;
+  height: 44px;
+  margin-top: 8px;
+}
+
+.button-parent {
+  text-align: center;
+  padding: 16px;
+  margin-top: 44-16px;
+}
 </style>

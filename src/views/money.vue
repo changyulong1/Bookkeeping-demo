@@ -1,9 +1,11 @@
 <template>
   <Layout class-parfir="layout">
+    {{ record }}
     <Buts @updata:ok="getok" @updata:recordList="uplist"/>
     <Gomoney  :value.sync="record.type"/>
     <Exegesis text="注释" plac="请输入内容" @updata:value="getValue"/>
-    <Top :nmver-datas.sync="gets" @updata:selectDatas="getSelectData"/>
+    <Top :nmver-datas.sync="gets"
+         @updata:selectDatas="getSelectData"/>
   </Layout>
 </template>
 
@@ -34,6 +36,7 @@ export default class money extends Vue {
   }
 
   getValue(value: string) {
+    console.log(3)
     this.record.notes = value;
   }
 
@@ -51,7 +54,6 @@ export default class money extends Vue {
     this.recordList.push(record2);
     console.log(this.recordList);
   }
-
   @Watch('recordList')
   onRecordListChanged() {
     console.log(model);

@@ -7,7 +7,7 @@
       <li v-for="(get,index) in nmverDatas" :key="index"
           @click="select(get)"
       :class="{selected: selectDatas.indexOf(get)>=0}">
-        {{ get }}
+        {{ get.name }}
       </li>
     </ul>
   </div>
@@ -16,6 +16,7 @@
 <script lang="ts">
 import Vue from "vue";
 import {Component, Prop} from "vue-property-decorator";
+
 
 @Component
 export default class Top extends Vue {
@@ -36,7 +37,7 @@ export default class Top extends Vue {
       alert('请输入正觉的标签米昂')
     }else if(this.nmverDatas){
       //采坑
-      this.$emit('update:nmver-datas',[...this.nmverDatas,name])
+      this.$emit('update:nmver-datas',[...this.nmverDatas,{'id':name,"name":name}])
     }
 
   }
