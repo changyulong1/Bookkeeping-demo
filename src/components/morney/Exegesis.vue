@@ -1,17 +1,19 @@
 <template>
   <label class="exegesis">
-    <span class="zs">注释</span>
-    <input type="text"  v-model="value"  placeholder="请输入内容"/>
+    <span class="zs">{{ text }}</span>
+    <input type="text"  v-model="value"  :placeholder="plac"/>
   </label>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import {Component, Watch} from "vue-property-decorator";
+import {Component, Prop, Watch} from "vue-property-decorator";
 
 @Component
 export default class Exegesis extends Vue {
   value = "";
+  @Prop() text!:string;
+  @Prop({default:'请输入内容'}) plac!:string
   @Watch('value')
   onChildChanged(value:string){
     this.$emit("updata:value",value)

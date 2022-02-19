@@ -1,8 +1,8 @@
 <template>
   <Layout class-parfir="layout">
     <Buts @updata:ok="getok" @updata:recordList="uplist"/>
-    <Gomoney :value.sync="record.type"/>
-    <Exegesis @updata:value="getValue"/>
+    <Gomoney  :value.sync="record.type"/>
+    <Exegesis text="注释" plac="请输入内容" @updata:value="getValue"/>
     <Top :nmver-datas.sync="gets" @updata:selectDatas="getSelectData"/>
   </Layout>
 </template>
