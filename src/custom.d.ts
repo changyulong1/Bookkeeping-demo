@@ -20,7 +20,10 @@ type RecordI = {
 
 interface Window {
     tagList: dataid[];
+    getTag: (id: string) => dataid;
     createTag: (name: string) => void;
     removeTag: (id: string) => boolean;
     updateTag: (id: string, name: string) => string;
+    dataList: RecordID[];
+    createData: (record: RecordID) => void;
 }

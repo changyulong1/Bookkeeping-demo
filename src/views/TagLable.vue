@@ -23,13 +23,9 @@ import Button from "@/components/Button.vue";
 })
 export default class TagLable extends Vue {
   tag?: { id: string, name: string } = undefined;
-
   created() {
-    const id = this.$route.params.id;
-    const tag = window.tagList.filter(data => data.id === id)[0];
-    if (tag) {
-      this.tag = tag;
-    } else {
+    this.tag = window.getTag(this.$route.params.id);
+    if (!this.tag) {
       this.$router.replace('/404');
     }
   }

@@ -7,6 +7,7 @@ const recordList = {
         const record2: RecordID = clone(record);
         record2.createAt = new Date();
         this.data.push(record2);
+        this.setLanguage()
     },
     getLanguage() {
         this.data = JSON.parse(window.localStorage.getItem(name) || '[]') as RecordID[];
