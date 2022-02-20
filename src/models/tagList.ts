@@ -9,7 +9,6 @@ const tagList: RecordI = {
     },
     create(name) {
         const names = this.dataList.map(data => data.name);
-
         if (names.indexOf(name) >= 0) {
             return 'duplicated';
         }
@@ -24,7 +23,6 @@ const tagList: RecordI = {
 
             const names = this.dataList.map(data => data.name);
             if (names.indexOf(name) >= 0) {
-
                 return "重复";
             } else {
                 const tag = this.dataList.filter(data => data.id === id)[0];

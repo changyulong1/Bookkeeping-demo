@@ -17,6 +17,10 @@ type RecordI = {
     update: (id: string, name: string) => string
     remove: (id: string) => boolean
 }
+
 interface Window {
     tagList: dataid[];
+    createTag: (name: string) => void;
+    removeTag: (id: string) => boolean;
+    updateTag: (id: string, name: string) => string;
 }
