@@ -1,6 +1,5 @@
 <template>
   <Layout class-parfir="layout">
-    {{ recordList }}
     <Buts @updata:ok="getok" @updata:recordList="uplist"/>
     <Gomoney  :value.sync="record.type"/>
     <Exegesis text="注释" plac="请输入内容" @updata:value="getValue"/>
@@ -16,16 +15,15 @@ import Exegesis from "@/components/morney/Exegesis.vue";
 import Gomoney from "@/components/morney/Gomoney.vue";
 import Buts from "@/components/morney/Buts.vue";
 import {Component, Watch} from "vue-property-decorator";
-import model from "@/models/model";
-import models from "@/models/models";
+import recordList from "@/models/recordList";
 
-const dataList = model.getLanguage();
-const getsList = models.getLanguage()
+const dataList = recordList.getLanguage();
+
 @Component({
   components: {Buts, Gomoney, Exegesis, Top}
 })
 export default class money extends Vue {
-  gets = getsList;
+  gets = window.tagList;
   record: RecordID = {
     tags: [], notes: '', type: "-", amount: 0, createAt: new Date()
   };
@@ -49,11 +47,11 @@ export default class money extends Vue {
   }
 
   uplist() {
-    model.create(this.record)
+    recordList.create(this.record)
   }
   @Watch('recordList')
   onRecordListChanged() {
-    model.setLanguage();
+    recordList.setLanguage();
   }
 }
 </script>

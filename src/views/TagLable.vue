@@ -15,7 +15,7 @@
 <script lang="ts">
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
-import models from "@/models/models";
+import tagList from "@/models/tagList";
 import Exegesis from "@/components/morney/Exegesis.vue";
 import Button from "@/components/Button.vue";
 
@@ -27,8 +27,8 @@ export default class TagLable extends Vue {
 
   created() {
     const id = this.$route.params.id;
-    models.getLanguage();
-    const tag = models.dataList.filter(data => data.id === id)[0];
+    tagList.getLanguage();
+    const tag = tagList.dataList.filter(data => data.id === id)[0];
     if (tag) {
       this.tag = tag;
     } else {
@@ -38,13 +38,13 @@ export default class TagLable extends Vue {
 
   updateTag(name: string) {
     if (this.tag) {
-      models.update(this.tag.id, name);
+      tagList.update(this.tag.id, name);
     }
   }
 
   remove() {
     if (this.tag) {
-      if(models.remove(this.tag.id)){
+      if(tagList.remove(this.tag.id)){
         this.$router.back()
       }
     }

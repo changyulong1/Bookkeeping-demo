@@ -15,18 +15,18 @@
 <script lang="ts">
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
-import models from "@/models/models";
+import tagList from "@/models/tagList";
 import Button from "@/components/Button.vue";
-models.getLanguage()
+
 @Component({
   components: {Button}
 })
 export default class labels extends Vue {
-  tags = models.dataList;
+  tags = window.tagList;
   createTag() {
     const name = window.prompt("请输入标签名");
     if (name) {
-      const message = models.create(name);
+      const message = tagList.create(name);
       if (message === "duplicated") {
         window.alert("标签重复");
       }else{

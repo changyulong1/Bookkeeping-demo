@@ -1,19 +1,7 @@
 import createId from "@/lid/createId";
 
 const name = "tagList";
-type dataid = {
-    id: string
-    name: string
-}
-type RecordI = {
-    dataList: dataid[]
-    getLanguage: () => dataid[]
-    create: (name: string) => 'success' | 'duplicated'
-    setLanguage: () => void
-    update: (id: string, name: string) => string
-    remove: (id: string) => boolean
-}
-const models: RecordI = {
+const tagList: RecordI = {
     dataList: [],
     getLanguage() {
         this.dataList = JSON.parse(window.localStorage.getItem(name) || '[]');
@@ -65,4 +53,4 @@ const models: RecordI = {
         window.localStorage.setItem(name, JSON.stringify(this.dataList));
     }
 };
-export default models;
+export default tagList;
