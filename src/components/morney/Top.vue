@@ -16,6 +16,7 @@
 <script lang="ts">
 import Vue from "vue";
 import {Component, Prop} from "vue-property-decorator";
+import store from "@/store/index2";
 
 
 @Component
@@ -33,12 +34,16 @@ export default class Top extends Vue {
   }
   createType(){
     const name = prompt("请输入新标签")
-    if(name === ''){
-      alert('请输入正觉的标签米昂')
-    }else if(this.nmverDatas){
-      //采坑
-      this.$emit('update:nmver-datas',[...this.nmverDatas,{'id':name,"name":name}])
+    if(name){
+      store.createTag(name)
     }
+    // if(name === ''){
+    //   alert('请输入正觉的标签名')
+    // }else if(this.nmverDatas){
+    //   //采坑
+    //
+    //   // this.$emit('update:nmver-datas',[...this.nmverDatas,{id:name,name:name}])
+    // }
 
   }
 }
