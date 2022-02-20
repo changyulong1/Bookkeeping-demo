@@ -1,6 +1,6 @@
 <template>
   <Layout class-parfir="layout">
-    {{ record }}
+    {{ recordList }}
     <Buts @updata:ok="getok" @updata:recordList="uplist"/>
     <Gomoney  :value.sync="record.type"/>
     <Exegesis text="注释" plac="请输入内容" @updata:value="getValue"/>
@@ -49,15 +49,11 @@ export default class money extends Vue {
   }
 
   uplist() {
-    const record2: RecordID = JSON.parse(JSON.stringify(this.record));
-    record2.createAt = new Date();
-    this.recordList.push(record2);
-    console.log(this.recordList);
+    model.create(this.record)
   }
   @Watch('recordList')
   onRecordListChanged() {
-    console.log(model);
-    model.setLanguage(this.recordList);
+    model.setLanguage();
   }
 }
 </script>
