@@ -1,5 +1,4 @@
 import createId from "@/lid/createId";
-
 const name = "tagList";
 const tagList: RecordI = {
     dataList: [],
@@ -9,7 +8,7 @@ const tagList: RecordI = {
     },
     create(name) {
         const names = this.dataList.map(data => data.name);
-        if (names.indexOf(name) >= 0) {
+       if (names.indexOf(name) >= 0) {
             return 'duplicated';
         }
         const id = createId().toString()

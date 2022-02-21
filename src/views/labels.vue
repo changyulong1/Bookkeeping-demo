@@ -22,7 +22,7 @@ import store from "@/store/index2";
   components: {Button}
 })
 export default class labels extends Vue {
-  tags = store.tagList;
+  tags = store.dataList;
   createTag() {
     const name = window.prompt("请输入标签名");
    if(name){

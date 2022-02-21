@@ -1,6 +1,19 @@
-import recordList from "@/models/recordList";
-
-export default {
-    dataList: recordList.getLanguage(),
-    createData:(record:RecordID) =>{recordList.create(record)},
+import clone from "@/lid/clone";
+const name = "recordList";
+ const recordList={
+    data: [] as RecordID[],
+    etLanguage() {
+        this.data = JSON.parse(window.localStorage.getItem(name) || '[]') as RecordID[];
+        return this.data;
+    },
+    create(record: RecordID) {
+        const record2: RecordID = clone(record);
+        record2.createAt = new Date();
+        this.data.push(record2);
+        this.setLanguage()
+    },
+    setLanguage() {
+        window.localStorage.setItem(name, JSON.stringify(this.data));
+    }
 }
+export default recordList

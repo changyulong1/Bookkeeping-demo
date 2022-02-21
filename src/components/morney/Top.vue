@@ -37,14 +37,6 @@ export default class Top extends Vue {
     if(name){
       store.createTag(name)
     }
-    // if(name === ''){
-    //   alert('请输入正觉的标签名')
-    // }else if(this.nmverDatas){
-    //   //采坑
-    //
-    //   // this.$emit('update:nmver-datas',[...this.nmverDatas,{id:name,name:name}])
-    // }
-
   }
 }
 </script>
