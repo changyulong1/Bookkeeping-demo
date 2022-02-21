@@ -18,14 +18,12 @@ import {Component} from "vue-property-decorator";
 import Button from "@/components/Button.vue";
 
 @Component({
-  components: {Button},
-  computed:{
-    tags(){
-      return this.$store.state.tagList
-    }
-  }
+  components: {Button}
 })
 export default class labels extends Vue {
+  get tags(){
+    return this.$store.state.tagList
+  }
   created(){
     this.$store.commit('getLanguage')
   }

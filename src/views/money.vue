@@ -17,16 +17,13 @@ import Buts from "@/components/morney/Buts.vue";
 import {Component} from "vue-property-decorator";
 
 @Component({
-  components: {Buts, Gomoney, Exegesis, Top},
-  computed:{
-    tags(){
-      return this.$store.state.tagList
-    }
-  }
+  components: {Buts, Gomoney, Exegesis, Top}
 
 })
 export default class money extends Vue {
-  // tags=this.$store.state.tagList;
+  get tags(){
+    return this.$store.state.tagList
+  }
   record: RecordID = {
     tags: [], notes: '', type: "-", amount: 0, createAt: new Date()
   };
