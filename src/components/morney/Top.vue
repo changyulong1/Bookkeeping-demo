@@ -16,7 +16,6 @@
 <script lang="ts">
 import Vue from "vue";
 import {Component, Prop} from "vue-property-decorator";
-import store from "@/store/index2";
 
 
 @Component
@@ -35,7 +34,7 @@ export default class Top extends Vue {
   createType(){
     const name = prompt("请输入新标签")
     if(name){
-      store.createTag(name)
+      this.$store.commit('createTag',name)
     }
   }
 }

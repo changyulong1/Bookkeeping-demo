@@ -17,31 +17,35 @@ import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import Exegesis from "@/components/morney/Exegesis.vue";
 import Button from "@/components/Button.vue";
-import store from "@/store/index2";
 
 @Component({
-  components: {Button, Exegesis}
+  components: {Button, Exegesis},
 })
 export default class TagLable extends Vue {
-  tag?: { id: string, name: string } = undefined;
+  get tag() {
+    return this.$store.state.tag;
+  }
+
   created() {
-    this.tag = store.getTag(this.$route.params.id);
+    this.$store.commit('getLanguage');
+    this.$store.commit('getTag', this.$route.params.id);
     if (!this.tag) {
-      this.$router.replace('/404');
+      this.$router.push('/404');
     }
   }
+
   updateTag(name: string) {
     if (this.tag) {
-      store.updateTag(this.tag.id, name);
+      this.$store.commit('updateTag',{id:this.tag.id,name:name});
     }
   }
+
   remove() {
     if (this.tag) {
-      if (store.removeTag(this.tag.id)) {
-        this.$router.push('/labels');
-      }
+      this.$store.commit('removeTag',this.tag.id);
     }
   }
+
   to() {
     this.$router.back();
   }

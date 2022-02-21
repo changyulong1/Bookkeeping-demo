@@ -16,17 +16,23 @@
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import Button from "@/components/Button.vue";
-import store from "@/store/index2";
 
 @Component({
-  components: {Button}
+  components: {Button},
+  computed:{
+    tags(){
+      return this.$store.state.tagList
+    }
+  }
 })
 export default class labels extends Vue {
-  tags = store.dataList;
+  created(){
+    this.$store.commit('getLanguage')
+  }
   createTag() {
     const name = window.prompt("请输入标签名");
    if(name){
-     store.createTag(name)
+     this.$store.commit('createTag',name)
    }
   }
 }

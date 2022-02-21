@@ -3,7 +3,7 @@
     <Buts @updata:ok="getok" @updata:recordList="updataList"/>
     <Gomoney  :value.sync="record.type"/>
     <Exegesis text="注释" plac="请输入内容" @updata:value="getValue"/>
-    <Top :nmver-datas.sync="gets"
+    <Top :nmver-datas.sync="tags"
          @updata:selectDatas="getSelectData"/>
   </Layout>
 </template>
@@ -15,19 +15,25 @@ import Exegesis from "@/components/morney/Exegesis.vue";
 import Gomoney from "@/components/morney/Gomoney.vue";
 import Buts from "@/components/morney/Buts.vue";
 import {Component} from "vue-property-decorator";
-import store from "@/store/index2";
 
 @Component({
-  components: {Buts, Gomoney, Exegesis, Top}
+  components: {Buts, Gomoney, Exegesis, Top},
+  computed:{
+    tags(){
+      return this.$store.state.tagList
+    }
+  }
+
 })
 export default class money extends Vue {
-  gets = store.dataList;
+  // tags=this.$store.state.tagList;
   record: RecordID = {
     tags: [], notes: '', type: "-", amount: 0, createAt: new Date()
   };
-  recordList: RecordID[] = store.data;
+  created(){
+    this.$store.commit('getLanguage')
+  }
   getSelectData(value: string[]) {
-    console.log(value)
     this.record.tags = value;
   }
 
@@ -39,7 +45,9 @@ export default class money extends Vue {
   }
 
   updataList() {
-    store.create(this.record)
+    // store.create(this.record)
+    this.$store.commit('create',this.record)
+
   }
 }
 </script>

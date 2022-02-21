@@ -1,3 +1,10 @@
+
+type RootState = {
+    recordList:RecordID[]
+    tagList: Tag[]
+    tag?:Tag
+}
+
 type RecordID = {
     tags: string[]
     notes: string
@@ -5,13 +12,13 @@ type RecordID = {
     amount: number
     createAt: Date
 }
-type dataid = {
+type Tag = {
     id: string
     name: string
 }
 type RecordI = {
-    dataList: dataid[]
-    getLanguage: () => dataid[]
+    dataList: Tag[]
+    getLanguage: () => Tag[]
     create: (name: string) => 'success' | 'duplicated'
     setLanguage: () => void
     update: (id: string, name: string) => string
@@ -20,8 +27,8 @@ type RecordI = {
 
 interface Window {
     store:{
-        tagList: dataid[];
-        getTag: (id: string) => dataid;
+        tagList: Tag[];
+        getTag: (id: string) => Tag;
         createTag: (name: string) => void;
         removeTag: (id: string) => boolean;
         updateTag: (id: string, name: string) => string;

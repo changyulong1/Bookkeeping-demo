@@ -1,7 +1,7 @@
 import createId from "@/lid/createId";
 const name = "tagList";
 const tagList = {
-    dataList: [] as dataid[],
+    dataList: [] as Tag[],
     getLanguage() {
         this.dataList = JSON.parse(window.localStorage.getItem(name) || '[]');
         return this.dataList;
@@ -58,4 +58,5 @@ const tagList = {
         window.localStorage.setItem(name, JSON.stringify(this.dataList));
     }
 };
+tagList.getLanguage()
 export default tagList;
