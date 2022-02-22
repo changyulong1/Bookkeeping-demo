@@ -1,7 +1,7 @@
 <template>
   <Layout class-parfir="layout">
     <Buts @updata:ok="getok" @updata:recordList="updataList"/>
-    <Gomoney  :value.sync="record.type"/>
+    <Tags :arry="tag" :value.sync="record.type"></Tags>
     <Exegesis text="注释" plac="请输入内容" @updata:value="getValue"/>
     <Top :nmver-datas.sync="tags"
          @updata:selectDatas="getSelectData"/>
@@ -15,15 +15,17 @@ import Exegesis from "@/components/morney/Exegesis.vue";
 import Gomoney from "@/components/morney/Gomoney.vue";
 import Buts from "@/components/morney/Buts.vue";
 import {Component} from "vue-property-decorator";
+import Tags from "@/components/Tags.vue";
+import tag2 from "@/consts/tag2";
 
 @Component({
-  components: {Buts, Gomoney, Exegesis, Top}
-
+  components: {Tags, Buts, Gomoney, Exegesis, Top}
 })
 export default class money extends Vue {
   get tags(){
     return this.$store.state.tagList
   }
+  tag=tag2
   record: RecordID = {
     tags: [], notes: '', type: "-", amount: 0, createAt: new Date()
   };
