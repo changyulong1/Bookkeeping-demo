@@ -1,13 +1,13 @@
 <template>
   <Layout>
     <Tags class-prenfix="tags1" :arry="ta2" :value.sync="text1"></Tags>
-    <Tags class-prenfix="tags2" :arry="ta1" :value.sync="text2"></Tags>
     <ol>
       <li v-for="time in list" :key="time.title">
-        <h3>{{ time.title }}</h3>
+        <h3 class="title">{{ time.title }}</h3>
         <ol>
-          <li v-for="(data,index) in time.list" :key="index">
-            <span>{{ data.amount }}</span><span>{{ data.createAt }}</span>
+          <li class="tags" v-for="(data,index) in time.list" :key="index">
+            <span>{{ data.tags[0].name }}</span><span>{{ data.notes }}</span>
+            <span>{{ data.type==="+"?"+"+data.amount:"-"+data.amount }}</span>
           </li>
         </ol>
       </li>
@@ -63,6 +63,21 @@ export default class statistics extends Vue {
 }
 ::v-deep .time ul li.tags2-time{
   height: 40px;
+}
+.title{
+  font-size: 17px;
+  padding: 8px 15px;
+}
+.tags{
+  font-size: 17px;
+  padding: 6px 15px;
+  display: flex;
+  justify-content: space-between;
+  background: #FFFFFF;
+
+  span:nth-child(2){
+    color: #666666;
+  }
 }
 
 </style>

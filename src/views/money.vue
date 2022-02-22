@@ -22,31 +22,39 @@ import tag2 from "@/consts/tag2";
   components: {Tags, Buts, Gomoney, Exegesis, Top}
 })
 export default class money extends Vue {
-  get tags(){
-    return this.$store.state.tagList
+  get tags() {
+    return this.$store.state.tagList;
   }
-  tag=tag2
+
+  tag = tag2;
   record: RecordID = {
-    tags: [], notes: '', type: "-", amount: 0, createAt: new Date()
+    tags: [], notes: '', type: "-", amount: 0, createAt: new Date().toISOString()
   };
-  created(){
-    this.$store.commit('getLanguage')
+
+  created() {
+    this.$store.commit('getLanguage');
   }
+
   getSelectData(value: string[]) {
     this.record.tags = value;
   }
 
   getValue(value: string) {
     this.record.notes = value;
+
   }
+
   getok(value: string) {
     this.record.amount = parseFloat(value);
   }
 
   updataList() {
-    // store.create(this.record)
-    this.$store.commit('create',this.record)
-
+    const leng = this.record.tags.length;
+    if (leng === 0 && !this.record.notes) {
+      window.alert('请确认标签或者请输入备注"');
+      return;
+    }
+    this.$store.commit('create', this.record);
   }
 }
 </script>
