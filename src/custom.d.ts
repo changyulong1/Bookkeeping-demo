@@ -3,7 +3,7 @@ type RootState = {
     recordList:RecordID[]
     tagList: Tag[]
     tag?:Tag
-    tagName?:never
+    tagName?:any
 }
 
 type RecordID = {
