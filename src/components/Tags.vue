@@ -6,7 +6,6 @@
       v-for="time in arry" :key="time.value">{{ time.text }}
       </li>
     </ul>
-
   </div>
 </template>
 

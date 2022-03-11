@@ -11,11 +11,16 @@ const store = new Vuex.Store({
         tagList: [],
         recordList:[],
         tag: undefined,
+        tagName:undefined
 
     } as RootState,
     mutations: {
         //tag列表
         getLanguage(state) {
+            store.commit('createTag','衣')
+            store.commit('createTag','食')
+            store.commit('createTag','住')
+            store.commit('createTag','行')
             state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
             return state.tagList;
         },
@@ -29,12 +34,12 @@ const store = new Vuex.Store({
             if (name) {
                 const names = state.tagList.map(data => data.name);
                 if (names.indexOf(name) >= 0) {
-                    window.alert("标签名重复");
+                    store.state.tagName=null
                 } else {
                     const id = createId().toString();
                     state.tagList.push({id: id, name: name});
                     store.commit('setLanguage')
-                    window.alert("添加成功");
+                    store.state.tagName=undefined
                 }
             }
         },

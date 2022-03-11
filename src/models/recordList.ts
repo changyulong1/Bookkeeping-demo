@@ -5,7 +5,7 @@ const recordList = {
     data: [] as RecordID[],
     create(record: RecordID) {
         const record2: RecordID = clone(record);
-        record2.createAt = new Date();
+        record2.createAt = new Date().toISOString();
         this.data.push(record2);
         this.setLanguage()
     },

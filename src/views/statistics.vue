@@ -3,11 +3,12 @@
     <Tags class-prenfix="tags1" :arry="ta2" :value.sync="text1"></Tags>
     <ol>
       <li v-for="time in list" :key="time.title">
-        <h3 class="title">{{ time.title }}</h3>
+        <h3 class="title">{{hasDate(time.title ) }}</h3>
         <ol>
           <li class="tags" v-for="(data,index) in time.list" :key="index">
-            <span>{{ data.tags[0].name }}</span><span>{{ data.notes }}</span>
-            <span>{{ data.type==="+"?"+"+data.amount:"-"+data.amount }}</span>
+            <span v-if="data.type===text1">{{ data.tags.length ===0?"":data.tags[0].name}}</span>
+            <span v-if="data.type===text1">{{ data.notes }}</span>
+            <span v-if="data.type===text1">{{ data.type==="+"?"+"+data.amount:+data.amount}}</span>
           </li>
         </ol>
       </li>
@@ -22,6 +23,7 @@ import {Component} from "vue-property-decorator";
 import Tags from "@/components/Tags.vue";
 import tag1 from '@/consts/tag1.ts'
 import tag2 from '@/consts/tag2.ts'
+import dayjs from "dayjs";
 
 @Component({
   components: {Tags}
@@ -38,12 +40,24 @@ export default class statistics extends Vue {
     const {redList} = this
     const hasList:{[key:string]:{title:string,list:RecordID[]}} = {}
     for(let i=0;i<redList.length;i++){
-      const [data,time] = redList[i].createAt.split('T')
+      const [data] = redList[i].createAt.split('T')
       hasList[data]= hasList[data] ||{title:data,list:[]}
       hasList[data].list.push(redList[i])
     }
-    console.log(hasList)
     return hasList
+  }
+  hasDate(string:string){
+    const date = dayjs(string)
+    const day1 = dayjs()
+    if(date.isSame(day1,'day')){
+      return "今天"
+    }else if(date.isSame(day1.subtract(1,'day'),'day')){
+      return "昨天"
+    }else if(date.isSame(day1.subtract(2,'day'),'day')){
+      return '前天'
+    }else{
+      return date.format('yyyy年m月DD日')
+    }
   }
   created(){
     this.$store.commit('getRecordList')

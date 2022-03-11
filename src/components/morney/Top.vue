@@ -35,6 +35,11 @@ export default class Top extends Vue {
     const name = prompt("请输入新标签")
     if(name){
       this.$store.commit('createTag',name)
+      if(this.$store.state.tagName===null){
+        window.alert('标签名重复请重新输入')
+      }else{
+        window.alert("添加成功");
+      }
     }
   }
 }
