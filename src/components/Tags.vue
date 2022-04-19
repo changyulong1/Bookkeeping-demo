@@ -32,7 +32,7 @@ export default class Tags extends Vue {
 
     li {
       flex: 1;
-      background: #C4C4C4;
+      background: yellow;
       display: flex;
       padding: 15px 0;
       justify-content: center;
@@ -40,13 +40,15 @@ export default class Tags extends Vue {
       position: relative;
 
       &.selected {
+        background: black;
+        color: #FFFFFF;
         &:before {
           content: "";
           display: block;
           width: 100%;
           position: absolute;
           height: 4px;
-          background: #333333;
+          background: red;
           bottom: 0;
         }
 

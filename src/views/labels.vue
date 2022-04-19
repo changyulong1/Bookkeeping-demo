@@ -1,14 +1,15 @@
 <template>
   <layout>
-    <div class="tagsList">
-      <router-link :to="`/labels/tag/${tag.id}`" class="tag" v-for="(tag,i) in tags" :key="i">
-        <span>{{ tag.name }}</span>
-        <Icon iconName="jian"/>
-      </router-link>
-    </div>
-    <div class="creatTag-parent">
-      <Button class="creatTag" @click="createTag">添加标签</Button>
-    </div>
+<!--    <div class="tagsList">-->
+<!--      <router-link :to="`/labels/tag/${tag.id}`" class="tag" v-for="(tag,i) in tags" :key="i">-->
+<!--        <span>{{ tag.name }}</span>-->
+<!--        <Icon iconName="jian"/>-->
+<!--      </router-link>-->
+<!--    </div>-->
+<!--    <div class="creatTag-parent">-->
+<!--      <Button class="creatTag" @click="createTag">添加标签</Button>-->
+<!--    </div>-->
+    <Bill/>
   </layout>
 </template>
 
@@ -16,9 +17,12 @@
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import Button from "@/components/Button.vue";
+import Header from "@/components/Header.vue";
+import Count from "@/components/updataComp/Count.vue";
+import Bill from "@/components/updataComp/Bill.vue";
 
 @Component({
-  components: {Button}
+  components: {Bill, Count, Header, Button}
 })
 export default class labels extends Vue {
   get tags(){
@@ -41,6 +45,7 @@ export default class labels extends Vue {
   background: #FFFFFF;
   font-size: 16px;
   padding-left: 16px;
+
 
   > .tag {
     min-height: 40px;

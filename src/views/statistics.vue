@@ -2,13 +2,15 @@
   <Layout>
     <Tags class-prenfix="tags1" :arry="ta2" :value.sync="text1"></Tags>
     <ol>
-      <li v-for="time in list" :key="time.title">
+      <li  v-for="time in list" :key="time.title">
         <h3 class="title">{{hasDate(time.title ) }}</h3>
         <ol>
-          <li class="tags" v-for="(data,index) in time.list" :key="index">
-            <span v-if="data.type===text1">{{ data.tags.length ===0?"":data.tags[0].name}}</span>
-            <span v-if="data.type===text1">{{ data.notes }}</span>
-            <span v-if="data.type===text1">{{ data.type==="+"?"+"+data.amount:+data.amount}}</span>
+          <li class="listLi" v-for="(data,index) in time.list" :key="index">
+          <div class="tags" v-if="data.type===text1">
+            <span>{{ data.tags.length ===0?"":data.tags[0].name}}</span>
+            <span>{{ data.notes }}</span>
+            <span>{{ data.type==="+"?"+"+data.amount:+data.amount}}</span>
+          </div>
           </li>
         </ol>
       </li>
@@ -24,9 +26,10 @@ import Tags from "@/components/Tags.vue";
 import tag1 from '@/consts/tag1.ts'
 import tag2 from '@/consts/tag2.ts'
 import dayjs from "dayjs";
+import Header from "@/components/Header.vue";
 
 @Component({
-  components: {Tags}
+  components: {Header, Tags}
 })
 export default class statistics extends Vue {
   text1 = "-";
@@ -61,6 +64,7 @@ export default class statistics extends Vue {
   }
   created(){
     this.$store.commit('getRecordList')
+    console.log(this.list)
   }
 }
 </script>
@@ -77,6 +81,9 @@ export default class statistics extends Vue {
 }
 ::v-deep .time ul li.tags2-time{
   height: 40px;
+}
+.listLi{
+  margin-bottom: 10px;
 }
 .title{
   font-size: 17px;

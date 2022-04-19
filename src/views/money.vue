@@ -1,10 +1,10 @@
 <template>
   <Layout class-parfir="layout">
     <Buts @updata:ok="getok" @updata:recordList="updataList"/>
-    <Tags :arry="tag" :value.sync="record.type"></Tags>
     <Exegesis text="注释" plac="请输入内容" @updata:value="getValue"/>
     <Top :nmver-datas.sync="tags"
          @updata:selectDatas="getSelectData"/>
+    <Tags :arry="tag" :value.sync="record.type"></Tags>
   </Layout>
 </template>
 

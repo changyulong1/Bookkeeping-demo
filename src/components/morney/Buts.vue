@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="paentBtu">
     <div class="screen">
       {{ outMoney || '0' }}
     </div>
@@ -7,22 +7,17 @@
       <button @click="input">1</button>
       <button @click="input">2</button>
       <button @click="input">3</button>
-      <button @click="input">+</button>
       <button @click="remove">删除</button>
       <button @click="input">4</button>
       <button @click="input">5</button>
       <button @click="input">6</button>
-      <button @click="input">-</button>
-      <button @click="empty">清空</button>
+      <button @click="empty" class="qing">清空</button>
       <button @click="input">7</button>
       <button @click="input">8</button>
       <button @click="input">9</button>
-      <button @click="input">*</button>
       <button class="ok" @click="ok">ok</button>
       <button @click="input">0</button>
-      <button @click="input">.</button>
-      <button @click="input">=</button>
-      <button @click="input">/</button>
+      <button @click="input" >.</button>
     </div>
   </div>
 </template>
@@ -98,6 +93,9 @@ export default class Buts extends Vue {
 </script>
 <style lang="scss" scoped>
 @import "~@/assets/style/font.scss";
+.paentBtu{
+  overflow: hidden;
+}
 
 .screen {
   text-align: right;
@@ -111,14 +109,16 @@ export default class Buts extends Vue {
   @extend %clearfix;
 
   > button {
-    width: 20%;
-    height: 64px;
+    width: 25%;
+    height: 80px;
     float: left;
     border: none;
     font-size: 24px;
-
     &.ok {
-      height: 128px;
+     width: 50%;
+    }
+    &.qing{
+      height: 160px;
       float: right;
     }
 

@@ -14,6 +14,11 @@ body{
   line-height: 1.5;
   font-family: $font-hai;
   background: #F5F5F5;
+  max-width: 800px;
+  margin: 0 auto;
+  &{
+    overflow: hidden;
+  }
 }
 
 </style>
