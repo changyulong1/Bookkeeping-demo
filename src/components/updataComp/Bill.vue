@@ -3,14 +3,14 @@
     <div class="navBut">
       <Icon icon-name="left"/>
       <div class="but">
-        <button>支出</button>
-        <button class="selector">收入</button>
+        <button :class="{selector:iconName==='outList'}">支出</button>
+        <button :class="{selector:iconName==='inList'}">收入</button>
       </div>
       <span></span>
     </div>
     <div class="tagList">
       <ul>
-        <li v-for="time in icons['outList']" :key="time.name">
+        <li :class="{selector:false}" v-for="time in icons[iconName]" :key="time.name">
           <div>
             <Icon :icon-name="time.name"/>
           </div>
@@ -18,15 +18,18 @@
         </li>
       </ul>
     </div>
+    <Buttons/>
   </div>
 </template>
 
 <script lang="js">
+import Buttons from "@/components/Buttons";
 export default {
   name: "Bill",
+  components: {Buttons},
   data(){
     return {
-      inList:['gongzi','jianzhi','qianbao','hongbao','jiangjin','baoxiao','touzi','jiekuan','tuikuan'],
+      iconName: 'inList',
       icons:{
           'inList':[
             {name:'gongzi',title:'工资'},
@@ -37,7 +40,8 @@ export default {
             {name:'baoxiao',title:'报销'},
             {name:'touzi',title:'投资'},
             {name:'jiekuan',title:'借款'},
-            {name:'tuikuan',title:'退款'}
+            {name:'tuikuan',title:'退款'},
+            {name:'shezhi',title:'自定义'}
           ],
         "outList":[
           {name:'canyin',title:'餐饮'},
@@ -65,7 +69,8 @@ export default {
           {name:'haizi',title:'孩子'},
           {name:'huankuan',title:'还款'},
           {name:'shuma',title:'数码'},
-          {name:'app',title:'app'},
+          {name:'apple',title:'app'},
+          {name:'shezhi',title:'自定义'}
         ],
       }
     }
@@ -112,7 +117,6 @@ export default {
   }
   >.tagList{
     ul{
-      border: 1px solid red;
       @extend %clearfix;
       li{
         display: flex;
@@ -134,6 +138,16 @@ export default {
         >span{
           font-size: 12px;
           padding: 6px 0;
+        }
+        &.selector{
+          >div{
+            background: #31409f;
+            color: #FFFFFF;
+            >.icon{
+              fill: #FFFFFF;
+            }
+          }
+
         }
       }
     }
