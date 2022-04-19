@@ -10,7 +10,7 @@
     </div>
     <div class="tagList">
       <ul>
-        <li v-for="time in icons['inList']" :key="time.name">
+        <li v-for="time in icons['outList']" :key="time.name">
           <div>
             <Icon :icon-name="time.name"/>
           </div>
