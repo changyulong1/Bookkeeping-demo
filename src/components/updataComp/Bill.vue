@@ -23,7 +23,7 @@
 </template>
 
 <script lang="js">
-import Buttons from "@/components/Buttons";
+import Buttons from "@/components/updataComp/Buttons";
 export default {
   name: "Bill",
   components: {Buttons},
@@ -81,7 +81,7 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/style/font.scss";
 .parent{
-  padding: 0 14px;
+  //padding: 0 14px;
   >.navBut{
     display: flex;
     justify-content: space-between;
@@ -91,6 +91,7 @@ export default {
     margin-bottom: 1px;
     >.icon{
      fill: #31409f;
+      margin-left: 10px;
     }
    >.but{
      >button{

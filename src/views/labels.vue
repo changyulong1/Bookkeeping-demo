@@ -9,7 +9,10 @@
 <!--    <div class="creatTag-parent">-->
 <!--      <Button class="creatTag" @click="createTag">添加标签</Button>-->
 <!--    </div>-->
-    <Bill/>
+<!--    <Bill/>-->
+<!--   <SetTag/>-->
+<!--    <CreateTag/>-->
+    <Date  @update:value="getTime"/>
   </layout>
 </template>
 
@@ -18,11 +21,18 @@ import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import Button from "@/components/Button.vue";
 import Header from "@/components/Header.vue";
+//账单
 import Count from "@/components/updataComp/Count.vue";
+//添加页
 import Bill from "@/components/updataComp/Bill.vue";
+import SetUp from "@/components/updataComp/setUp.vue";
+import SetTag from "@/components/updataComp/SetTag.vue";
+import CreateTag from "@/components/updataComp/CreateTag.vue";
+import Date from "@/components/updataComp/Date.vue";
+
 
 @Component({
-  components: {Bill, Count, Header, Button}
+  components: {Date, CreateTag, SetTag, SetUp, Bill, Count, Header, Button}
 })
 export default class labels extends Vue {
   get tags(){
@@ -36,6 +46,9 @@ export default class labels extends Vue {
    if(name){
      this.$store.commit('createTag',name)
    }
+  }
+  getTime(value:string){
+    console.log(value)
   }
 }
 </script>

@@ -6,6 +6,9 @@ import store from './store';
 import Nav from "@/components/Nav.vue";
 import Layout from "@/components/Layout.vue";
 import icon from "@/components/Icon.vue";
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
 Vue.component("Nav", Nav);

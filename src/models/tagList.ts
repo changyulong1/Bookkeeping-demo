@@ -12,7 +12,8 @@ const tagList: RecordI = {
             return 'duplicated';
         }
         const id = createId().toString()
-        this.dataList.push({id: id, name: name});
+        ///bug
+        this.dataList.push({id: id, name: name,title:'1'});
         this.setLanguage();
         return 'success';
     },

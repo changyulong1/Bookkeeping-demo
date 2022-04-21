@@ -11,7 +11,7 @@ const tagList = {
     },
     createTag(name: string) {
         if (name) {
-            // const message = tagList.create(name);
+            // const message = iconsList.create(name);
             const names = this.dataList.map(data => data.name);
             if (names.indexOf(name) >= 0) {
                 window.alert("标签名重复");
@@ -24,7 +24,7 @@ const tagList = {
         }
     },
     removeTag(id: string){
-        // return tagList.remove(id);
+        // return iconsList.remove(id);
         let index = 0;
         const data = this.dataList;
         for (let i = 0; i < data.length; i++) {
@@ -38,7 +38,7 @@ const tagList = {
         return true;
     },
     updateTag(id: string, name: string){
-        // return tagList.update(id, name);
+        // return iconsList.update(id, name);
         const listId = this.dataList.map(data => data.id);
         if (listId.indexOf(id) >= 0) {
             const names = this.dataList.map(data => data.name);

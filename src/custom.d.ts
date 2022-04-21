@@ -1,13 +1,13 @@
 
 type RootState = {
     recordList:RecordID[]
-    tagList: Tag[]
+    iconsList:{inList:Tag[],outList:Tag[]}
     tag?:Tag
     tagName?:any
 }
 
 type RecordID = {
-    tags: string[]
+    tags: Tag
     notes: string
     type: string
     amount: number
@@ -16,6 +16,7 @@ type RecordID = {
 type Tag = {
     id: string
     name: string
+    title:string
 }
 type RecordI = {
     dataList: Tag[]
@@ -30,7 +31,7 @@ interface Window {
     store:{
         tagList: Tag[];
         getTag: (id: string) => Tag;
-        createTag: (name: string) => void;
+        createTag: (time: { name: string, title: string },iconName:string) => void;
         removeTag: (id: string) => boolean;
         updateTag: (id: string, name: string) => string;
         dataList: RecordID[];

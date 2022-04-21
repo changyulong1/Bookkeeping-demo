@@ -1,10 +1,12 @@
 <template>
   <Layout class-parfir="layout">
-    <Buts @updata:ok="getok" @updata:recordList="updataList"/>
-    <Exegesis text="注释" plac="请输入内容" @updata:value="getValue"/>
-    <Top :nmver-datas.sync="tags"
-         @updata:selectDatas="getSelectData"/>
-    <Tags :arry="tag" :value.sync="record.type"></Tags>
+<!--    <Buts @updata:ok="getok" @updata:recordList="updataList"/>-->
+<!--    <Exegesis text="注释" plac="请输入内容" @updata:value="getValue"/>-->
+    <Tags :arry="iconType" :value.sync="record.type"></Tags>
+    <Top :iconlist.sync="icons"
+         :iconType ="record.type"
+         @updata:getTime="getTime"/>
+    <Buttons v-if="show" @updata:ok="getok" @updata:recordList="updataList"/>
   </Layout>
 </template>
 
@@ -17,26 +19,28 @@ import Buts from "@/components/morney/Buts.vue";
 import {Component} from "vue-property-decorator";
 import Tags from "@/components/Tags.vue";
 import tag2 from "@/consts/tag2";
+import Buttons from "@/components/updataComp/Buttons.vue";
 
 @Component({
-  components: {Tags, Buts, Gomoney, Exegesis, Top}
+  components: {Buttons, Tags, Buts, Gomoney, Exegesis, Top}
 })
 export default class money extends Vue {
-  get tags() {
-    return this.$store.state.tagList;
+  get icons() {
+    return this.$store.state.iconsList;
   }
-
-  tag = tag2;
+  iconType = tag2;
+  show = false
   record: RecordID = {
-    tags: [], notes: '', type: "-", amount: 0, createAt: new Date().toISOString()
+    tags: {id:'',name:'',title:''}, notes: '', type: "inList", amount: 0, createAt: new Date().toISOString()
   };
 
   created() {
     this.$store.commit('getLanguage');
   }
 
-  getSelectData(value: string[]) {
-    this.record.tags = value;
+  getTime(value:{id:string,name:string,title:string}) {
+    value?this.show = true:this.show = false
+    this.record.tags=value
   }
 
   getValue(value: string) {
@@ -44,24 +48,24 @@ export default class money extends Vue {
 
   }
 
-  getok(value: string) {
-    this.record.amount = parseFloat(value);
+  getok(value:{amount: number,notes: string,createAt:Date}) {
+    console.log(value)
+    this.record.amount = parseFloat(value.amount.toString());
+    this.record.notes= value.notes
+    this.record.createAt =value.createAt.toISOString()
   }
 
   updataList() {
-    const leng = this.record.tags.length;
-    if (leng === 0 && !this.record.notes) {
-      window.alert('请确认标签或者请输入备注"');
-      return;
-    }
+    console.log(555)
+    console.log(this.record.tags)
     this.$store.commit('create', this.record);
   }
 }
 </script>
 <style lang="scss">
 .layout-content {
-  display: flex;
-  flex-direction: column-reverse;
+  //display: flex;
+  //flex-direction: column-reverse;
 }
 
 </style>
