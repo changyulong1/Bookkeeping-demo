@@ -5,6 +5,8 @@ import Labels from '@/views/labels.vue'
 import Statistics from '@/views/statistics.vue'
 import onFile from '@/views/noFile.vue'
 import TagLable from "@/views/TagLable.vue";
+import SetTag from "@/components/updataComp/SetTag.vue";
+import createTag from "@/components/updataComp/CreateTag.vue";
 
 
 Vue.use(VueRouter)
@@ -29,6 +31,14 @@ const routes: Array<RouteConfig> = [
   {
     path:"/statistics",
     component:Statistics
+  },
+  {
+    path:"/labels/SetTag/:id",
+    component:SetTag
+  },
+  {
+    path:"/labels/Create/:iconName",
+    component:createTag
   },
   {
     path:"*",

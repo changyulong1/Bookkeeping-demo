@@ -1,8 +1,8 @@
 <template>
   <div class="navBut">
-    <Icon icon-name="left" />
+    <span @click="path"><Icon icon-name="left" /></span>
     <div class="title" v-if="!iconName">
-      <slot name="title"></slot>
+      <slot name="title" ></slot>
     </div>
     <div class="but" v-if="iconName">
       <button :class="{selector:iconName==='outList'}">支出</button>
@@ -14,10 +14,16 @@
   </div>
 </template>
 
-<script lang="js">
-export default {
-  props:['iconName']
-};
+<script lang="ts">
+import Vue from "vue";
+import {Component, Prop,} from "vue-property-decorator";
+@Component
+export default class Inout extends Vue{
+  @Prop(String) iconName:string|undefined
+  path(){
+    this.$router.back()
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -28,7 +34,7 @@ export default {
   align-items: center;
   font-size: 16px;
   background: #fdfdfd;
-  >.icon{
+  .icon{
     fill: #31409f;
   }
   >.but{

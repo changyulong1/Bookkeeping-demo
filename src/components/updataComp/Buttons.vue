@@ -10,7 +10,7 @@
         <button @click="input">2</button>
         <button @click="input">3</button>
         <button>
-          <Date :time.sync="createAt"/>
+          <Dates :times.sync="createAt"/>
         </button>
         <button @click="input">4</button>
         <button @click="input">5</button>
@@ -35,10 +35,10 @@
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import Button from "@/components/Button.vue";
-import Date from "@/components/updataComp/Date.vue";
+import Dates from "@/components/updataComp/Dates.vue";
 
 @Component({
-  components: {Date, Button}
+  components: {Dates, Button}
 })
 export default class Buts extends Vue {
   outMoney = '';

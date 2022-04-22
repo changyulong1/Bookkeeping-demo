@@ -9,7 +9,6 @@ export default {
         {name: 'touzi', title: '投资'},
         {name: 'jiekuan', title: '借款'},
         {name: 'tuikuan', title: '退款'},
-        {name: 'shezhi', title: '自定义'}
     ],
     "outList": [
         {name: 'canyin', title: '餐饮'},
@@ -38,6 +37,5 @@ export default {
         {name: 'huankuan', title: '还款'},
         {name: 'shuma', title: '数码'},
         {name: 'apple', title: 'app'},
-        {name: 'shezhi', title: '自定义'}
     ],
 };

@@ -5,7 +5,7 @@ type RootState = {
     tag?:Tag
     tagName?:any
 }
-
+type IconName = 'inList'|'outList'
 type RecordID = {
     tags: Tag
     notes: string

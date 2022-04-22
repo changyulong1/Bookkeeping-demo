@@ -5,7 +5,7 @@ import router from './router';
 import store from './store';
 import Nav from "@/components/Nav.vue";
 import Layout from "@/components/Layout.vue";
-import icon from "@/components/Icon.vue";
+import icon from "@/components/IconSvg.vue";
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);

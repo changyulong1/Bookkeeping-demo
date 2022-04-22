@@ -5,11 +5,16 @@
 </template>
 
 <script lang="ts">
+
+import Vue from "vue";
+import {Component, Prop} from "vue-property-decorator";
+
 let importAll = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().forEach(requireContext);
-try {importAll(require.context('../assets/icons', true, /\.svg$/));} catch (error) {console.log(error);}
-export default {
-  props:["iconName"],
-  name: "icon"
+try { importAll(require.context('../assets/icons', true, /\.svg$/));} catch (error) {console.log(error);}
+@Component
+export default class iconSvg extends Vue {
+  @Prop(String) iconName: string | undefined
+
 }
 </script>
 

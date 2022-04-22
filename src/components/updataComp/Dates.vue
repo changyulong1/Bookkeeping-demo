@@ -12,36 +12,36 @@
   </div>
 </template>
 
-<script lang="js">
-export default {
-  name: "Date",
-  props:['time'],
-  data() {
-    return {
-      value: new Date(),
-      Mask: false,
-      Hide:false
-    };
-  },
-  created(){
-    this.$emit('update:time',this.value)
-  },
-  methods: {
-    displayHide() {
-      if(this.Hide){
-        this.Hide=false
-        return
-      }
-      this.$refs.date.focus()
-      this.Mask = true
-    },
-    hide(){
-      this.Mask = false
-      this.Hide = true
-      this.$emit('update:time',this.value)
+<script lang="ts">
+import Vue from "vue";
+import {Component, Prop, Ref} from "vue-property-decorator";
+
+@Component
+export default class Dates extends Vue {
+  @Prop(String) times!:string
+  value = new Date().toISOString()
+  Mask = false
+  Hide = false
+  @Ref('date')  input !:HTMLInputElement
+
+  created() {
+    this.$emit('update:time', this.value)
+  }
+  displayHide(){
+    if (this.Hide) {
+      this.Hide = false
+      return
     }
-  },
-};
+    this.input.focus()
+    this.Mask = true
+  }
+
+  hide() {
+    this.Mask = false
+    this.Hide = true
+    this.$emit('update:time', this.value)
+  }
+}
 </script>
 
 <style lang="scss">
@@ -49,13 +49,15 @@ export default {
 .block {
   position: relative;
   width: 100%;
+
   > div.el-date-editor {
     width: 100%;
+
     > input.el-input__inner {
       text-align: center;
       padding: 0;
       border: none;
-      background: rgba(0,0,0,0);
+      background: rgba(0, 0, 0, 0);
       color: black;
 
       &::-webkit-input-placeholder {

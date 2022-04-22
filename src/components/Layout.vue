@@ -20,7 +20,7 @@ export default {
   height: 100vh;
 }
 .content{
-  flex-grow: 1;
+  flex: 1;
   overflow: auto;
 }
 

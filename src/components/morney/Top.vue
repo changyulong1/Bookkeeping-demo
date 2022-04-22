@@ -1,25 +1,19 @@
 <template>
-  <!--  <div class="top-money">-->
-  <!--    <div>-->
-  <!--      <button class="newBtn" @click="createType">新增标签</button>-->
-  <!--    </div>-->
-  <!--    <ul class="list">-->
-  <!--      <li v-for="(get,index) in nmverDatas" :key="index"-->
-  <!--          @click="select(get)"-->
-  <!--      :class="{selected: selectDatas.indexOf(get)>=0}">-->
-  <!--        {{ get.name }}-->
-  <!--      </li>-->
-  <!--    </ul>-->
-  <!--  </div>-->
   <div class="tagList">
     <ul>
-      <li :class="{selector:name === time.title}" v-for="time in iconlist[iconType]" :key="time.name"
+      <li :class="{selector:name === time.title}" v-for="time in iconlist[iconType]" :key="time.id"
           @click="witch(time)"
       >
         <div>
           <Icon :icon-name="time.name"/>
         </div>
         <span>{{ time.title }}</span>
+      </li>
+      <li @click="edit">
+        <div>
+          <Icon :icon-name="setName"/>
+        </div>
+        <span>{{ setTitle }}</span>
       </li>
     </ul>
   </div>
@@ -34,34 +28,26 @@ import iconlist from "@/store/iconlist";
 @Component
 export default class Top extends Vue {
   name = '';
+  setName = 'shezhi';
+  setTitle = '自定义';
   @Prop() iconType: string | undefined;
   @Prop() readonly iconlist: string[] | undefined;
   selectDatas: string[] = [];
 
   witch(time: { id: string, name: string, title: string }) {
 
-    if (time.title === '自定义') {
-      return;
-    }
-    if(this.name === time.title){
-      this.name = ''
+    if (this.name === time.title) {
+      this.name = '';
       this.$emit('updata:getTime');
-    }else{
+    } else {
       this.name = time.title;
       this.$emit('updata:getTime', time);
     }
   }
 
-  createType() {
-    const name = prompt("请输入新标签");
-    if (name) {
-      this.$store.commit('createTag', name);
-      if (this.$store.state.tagName === null) {
-        window.alert('标签名重复请重新输入');
-      } else {
-        window.alert("添加成功");
-      }
-    }
+  edit(){
+    console.log(555)
+    this.$router.push({path: '/labels', query: {type: this.iconType}});
   }
 
   @Watch('iconType')
@@ -74,10 +60,11 @@ export default class Top extends Vue {
 
 <style lang="scss" scoped>
 @import "~@/assets/style/font.scss";
+
 .tagList {
   ul {
     @extend %clearfix;
-
+    overflow: auto;
     li {
       display: flex;
       flex-direction: column;

@@ -1,9 +1,7 @@
 <template>
   <Layout class-parfir="layout">
-<!--    <Buts @updata:ok="getok" @updata:recordList="updataList"/>-->
-<!--    <Exegesis text="注释" plac="请输入内容" @updata:value="getValue"/>-->
     <Tags :arry="iconType" :value.sync="record.type"></Tags>
-    <Top :iconlist.sync="icons"
+    <Top class="icon-error" :iconlist.sync="icons"
          :iconType ="record.type"
          @updata:getTime="getTime"/>
     <Buttons v-if="show" @updata:ok="getok" @updata:recordList="updataList"/>
@@ -52,7 +50,7 @@ export default class money extends Vue {
     console.log(value)
     this.record.amount = parseFloat(value.amount.toString());
     this.record.notes= value.notes
-    this.record.createAt =value.createAt.toISOString()
+    this.record.createAt =value.createAt.toString()
   }
 
   updataList() {
@@ -64,8 +62,15 @@ export default class money extends Vue {
 </script>
 <style lang="scss">
 .layout-content {
-  //display: flex;
+
+  display: flex;
+  flex-direction: column;
   //flex-direction: column-reverse;
+  >.icon-error{
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+  }
 }
 
 </style>
