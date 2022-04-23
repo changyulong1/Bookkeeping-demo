@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {Component} from "vue-property-decorator";
+import {Component, Prop} from "vue-property-decorator";
 import Button from "@/components/Button.vue";
 import Dates from "@/components/updataComp/Dates.vue";
 
@@ -44,7 +44,14 @@ export default class Buts extends Vue {
   outMoney = '';
   createAt = new Date().toISOString();
   notes = '';
-
+  @Prop() readonly record?:RecordID
+  created(){
+    if(this.record){
+      this.outMoney=this.record.amount.toString()
+      this.notes=this.record.notes
+      this.createAt=this.record.createAt
+    }
+  }
   input(event: MouseEvent) {
     if (event.target) {
       const button = (event.target as HTMLBaseElement);

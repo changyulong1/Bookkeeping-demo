@@ -1,15 +1,15 @@
 <template>
-  <Layout class-parfir="layout">
-    <Tags :arry="iconType" :value.sync="record.type"></Tags>
-    <Top class="icon-error" :iconlist.sync="icons"
-         :iconType ="record.type"
-         @updata:getTime="getTime"/>
-    <Buttons v-if="show" @updata:ok="getok" @updata:recordList="updataList"/>
-  </Layout>
+
+   <Layout class-parfir="layout">
+     <Tags icon-name="left" :arry="iconType" :value.sync="record.type"></Tags>
+     <Top :record="getRecord" class="icon-error" :iconlist.sync="icons"
+          :iconType ="record.type"
+          @updata:getTime="getTime"/>
+     <Buttons :record="getRecord"  @updata:ok="getok" @updata:recordList="updataList"/>
+   </Layout>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
 import Top from "@/components/morney/Top.vue";
 import Exegesis from "@/components/morney/Exegesis.vue";
 import Gomoney from "@/components/morney/Gomoney.vue";
@@ -18,14 +18,17 @@ import {Component} from "vue-property-decorator";
 import Tags from "@/components/Tags.vue";
 import tag2 from "@/consts/tag2";
 import Buttons from "@/components/updataComp/Buttons.vue";
-
-
+import Vue from "vue";
+//Modify
 @Component({
   components: {Buttons, Tags, Buts, Gomoney, Exegesis, Top}
 })
-export default class money extends Vue {
+export default class Modify extends Vue {
   get icons() {
     return this.$store.state.iconsList;
+  }
+  get getRecord(){
+    return this.$store.state.record
   }
   iconType = tag2;
   show = false
@@ -34,7 +37,15 @@ export default class money extends Vue {
   };
 
   created() {
+    const id = this.$route.params.id
     this.$store.commit('getLanguage');
+    this.$store.commit('getRecordList');
+    this.$store.commit('getRecord',id)
+    this.record.type = this.getRecord.type
+    this.record.tags=this.getRecord.tags
+    this.record.notes=this.getRecord.notes
+    this.record.createAt=this.getRecord.createAt
+    this.record.amount=this.getRecord.amount
   }
 
   getTime(value:{id:string,name:string,title:string}) {
@@ -54,21 +65,12 @@ export default class money extends Vue {
   }
 
   updataList() {
-    this.$store.commit('create', this.record);
+    const id = this.$route.params.id
+    this.$store.commit('updateRecord', {id:id,time:this.record});
   }
 }
 </script>
-<style lang="scss">
-.layout-content {
 
-  display: flex;
-  flex-direction: column;
-  //flex-direction: column-reverse;
-  >.icon-error{
-    flex: 1;
-    display: flex;
-    overflow: hidden;
-  }
-}
+<style lang="scss" scoped>
 
 </style>

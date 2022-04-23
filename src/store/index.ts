@@ -14,8 +14,8 @@ const store = new Vuex.Store({
         iconsList: {inList: [], outList: []},
         recordList: [],
         tag: undefined,
-        tagName: undefined
-
+        tagName: undefined,
+        record:undefined
     } as RootState,
     mutations: {
         //tag列表
@@ -31,7 +31,6 @@ const store = new Vuex.Store({
             }
 
             state.iconsList = JSON.parse(window.localStorage.getItem('iconsList') || '{"inList":[],"outList":[]}');
-            console.log(state.iconsList)
             return state.iconsList;
         },
         setLanguage(state) {
@@ -43,15 +42,15 @@ const store = new Vuex.Store({
         },
         createTag(state, payload: { time: { name: string, title: string }, iconName: IconName }) {
             const {time, iconName} = payload;
-            const names = state.iconsList[iconName].map(data => data.name);
-            if (names.indexOf(time.name) >= 0) {
+            const titles = state.iconsList[iconName].map(data => data.name);
+            if (titles.indexOf(time.title) >= 0) {
                 store.state.tagName = null;
             } else {
                 if(time.name!==''&&time.title!==''){
                     const id = createId().toString();
                     state.iconsList[iconName].push({id: id, name: time.name, title: time.title});
                     store.commit('setLanguage');
-                    store.state.tagName = undefined;
+                    router.back()
                 }
 
             }
@@ -69,7 +68,6 @@ const store = new Vuex.Store({
             if (index >= 0) {
                 state.iconsList[iconName].splice(index, 1);
                 store.commit('setLanguage');
-                router.back();
             } else {
                 window.alert("没有这个标签");
             }
@@ -101,13 +99,38 @@ const store = new Vuex.Store({
             window.localStorage.setItem('recordList', JSON.stringify(state.recordList));
         },
         create(state, record: RecordID) {
-            console.log(record)
             const record1 = clone(record)
             const id = createId().toString();
             record1.id=id
             state.recordList.push(record1);
             store.commit('setRecordList');
+            router.push('/Count')
         },
+        removeRecord(state,id:string){
+            const data = state.recordList
+            let index = 0;
+            for(let i =0;i<data.length;i++){
+                if(data[i].id === id){
+                    index = i
+                    break
+                }
+            }
+            state.recordList.splice(index, 1)
+            store.commit('setRecordList');
+        },
+        getRecord(state,id){
+            state.record=state.recordList.filter(time=>time.id === id)[0]
+        },
+        updateRecord(state,payload:{id:string,time:RecordID}){
+            const {id,time} = payload
+           const record = state.recordList.filter(time=>time.id === id)[0]
+            record.tags=time.tags
+            record.createAt=time.createAt
+            record.amount=time.amount
+            record.type=time.type
+            store.commit('setRecordList')
+            router.back()
+        }
     },
     actions: {},
     modules: {}

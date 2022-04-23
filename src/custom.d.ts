@@ -4,6 +4,7 @@ type RootState = {
     iconsList:{inList:Tag[],outList:Tag[]}
     tag?:Tag
     tagName?:any
+    record?:RecordID
 }
 type IconName = 'inList'|'outList'
 type RecordID = {

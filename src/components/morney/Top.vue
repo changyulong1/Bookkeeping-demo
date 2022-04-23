@@ -31,9 +31,13 @@ export default class Top extends Vue {
   setName = 'shezhi';
   setTitle = '自定义';
   @Prop() iconType: string | undefined;
+  @Prop() readonly record?:RecordID
   @Prop() readonly iconlist: string[] | undefined;
-  selectDatas: string[] = [];
-
+ created(){
+   if(this.record){
+     this.name=this.record.tags.title
+   }
+ }
   witch(time: { id: string, name: string, title: string }) {
 
     if (this.name === time.title) {
@@ -46,7 +50,6 @@ export default class Top extends Vue {
   }
 
   edit(){
-    console.log(555)
     this.$router.push({path: '/labels', query: {type: this.iconType}});
   }
 

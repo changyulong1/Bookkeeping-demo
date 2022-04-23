@@ -57,11 +57,10 @@ export default class CreateTag extends Vue {
   }
 
   createTag() {
-    console.log(555);
     const iconName = this.$route.params.iconName;
     this.$store.commit('createTag',
         {time:{name:this.name,title:this.value},iconName:iconName});
-    this.$router.back()
+    // this.$router.back()
   }
 }
 </script>

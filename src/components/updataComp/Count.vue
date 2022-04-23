@@ -47,8 +47,8 @@
         <div>
           <span>账单详情</span>
           <div>
-            <span>修改</span>
-            <span class="deleteText" @click="removeTag">删除</span>
+            <span><router-link :to="`/Modify/${tag.id}`">修改</router-link></span>
+            <span class="deleteText" @click="removeTag(tag.id)">删除</span>
           </div>
         </div>
         <div>
@@ -159,7 +159,7 @@ export default class Count extends Vue {
       type: 'warning'
     }).then(() => {
       console.log(555)
-
+        this.$store.commit('removeRecord',)
 
 
     }).catch(() => {
