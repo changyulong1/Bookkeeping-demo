@@ -8,7 +8,7 @@ import SetTag from "@/components/updataComp/SetTag.vue";
 import createTag from "@/components/updataComp/CreateTag.vue";
 import Count from "@/components/updataComp/Count.vue";
 import Modify from "@/components/Modify.vue";
-
+///hyu
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
