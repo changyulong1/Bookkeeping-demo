@@ -19,6 +19,8 @@ import Tags from "@/components/Tags.vue";
 import tag2 from "@/consts/tag2";
 import Buttons from "@/components/updataComp/Buttons.vue";
 
+import createId from "@/lid/createId";
+
 @Component({
   components: {Buttons, Tags, Buts, Gomoney, Exegesis, Top}
 })
@@ -47,15 +49,12 @@ export default class money extends Vue {
   }
 
   getok(value:{amount: number,notes: string,createAt:Date}) {
-    console.log(value)
     this.record.amount = parseFloat(value.amount.toString());
     this.record.notes= value.notes
     this.record.createAt =value.createAt.toString()
   }
 
   updataList() {
-    console.log(555)
-    console.log(this.record.tags)
     this.$store.commit('create', this.record);
   }
 }

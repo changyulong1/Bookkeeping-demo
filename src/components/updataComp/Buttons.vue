@@ -10,7 +10,7 @@
         <button @click="input">2</button>
         <button @click="input">3</button>
         <button>
-          <Dates :times.sync="createAt"/>
+          <Dates :times="createAt" @update:time="setTimes"/>
         </button>
         <button @click="input">4</button>
         <button @click="input">5</button>
@@ -42,7 +42,7 @@ import Dates from "@/components/updataComp/Dates.vue";
 })
 export default class Buts extends Vue {
   outMoney = '';
-  createAt = '';
+  createAt = new Date().toISOString();
   notes = '';
 
   input(event: MouseEvent) {
@@ -102,7 +102,6 @@ export default class Buts extends Vue {
     }
     if (/[+/-]/g.test(this.outMoney)) {
       if (/[+/-]$/g.test(this.outMoney)) {
-        console.log(555);
         return;
       }
       const number = eval(this.outMoney);
@@ -117,6 +116,9 @@ export default class Buts extends Vue {
     this.$emit("updata:ok", obj);
     this.$emit("updata:recordList", this.outMoney);
     this.outMoney = "0";
+  }
+  setTimes(value:Date){
+    this.createAt = value.toISOString()
   }
 }
 </script>

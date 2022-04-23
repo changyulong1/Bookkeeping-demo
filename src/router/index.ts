@@ -7,17 +7,21 @@ import onFile from '@/views/noFile.vue'
 import TagLable from "@/views/TagLable.vue";
 import SetTag from "@/components/updataComp/SetTag.vue";
 import createTag from "@/components/updataComp/CreateTag.vue";
-
+import Count from "@/components/updataComp/Count.vue";
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
   {
     path:"/",
-    redirect:"/money"
+    redirect:"/Count"
   },
   {
-    path:'/money',
+    path:'/Count',
+    component:Count
+  },
+  {
+    path:'/Money',
     component:Money
   },
   {
@@ -29,16 +33,16 @@ const routes: Array<RouteConfig> = [
     component: TagLable
   },
   {
-    path:"/statistics",
-    component:Statistics
-  },
-  {
     path:"/labels/SetTag/:id",
     component:SetTag
   },
   {
     path:"/labels/Create/:iconName",
     component:createTag
+  },
+  {
+    path:"/statistics",
+    component:Statistics
   },
   {
     path:"*",

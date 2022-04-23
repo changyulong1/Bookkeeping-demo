@@ -19,7 +19,7 @@ import {Component, Prop, Ref} from "vue-property-decorator";
 @Component
 export default class Dates extends Vue {
   @Prop(String) times!:string
-  value = new Date().toISOString()
+  value = new Date()
   Mask = false
   Hide = false
   @Ref('date')  input !:HTMLInputElement

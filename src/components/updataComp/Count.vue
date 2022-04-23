@@ -1,89 +1,222 @@
 <template>
-  <div class="parent">
-    <div class="header">
-      <h3>2022年4月<Icon iconName="tou" /></h3>
-      <div class="main">
-        <div>
-          <span>本月收入</span>
-          <span class="money">￥3000</span>
-          <span>本月收入：500</span>
-        </div>
-        <div>
-          <span class="year">年度统计 <Icon iconName="leftTou" /></span>
-          <span></span>
-          <span>本月结余：3000</span>
-        </div>
-      </div>
-
-    </div>
-    <div class="section">
-      <div class="date">
-       <div>
-         2022年4月
-       </div>
-        <div class="inLout">
-          <span>收入：1000</span>
-          <span>支出：5000</span>
-        </div>
-      </div>
-      <ul class="detailed">
-        <li>
-          <div class="remarks">
-            <div class="icon">
-              <Icon iconName="che" />
-            </div>
-            <span>交通</span>
+  <Layout>
+    <div class="parent">
+      <div class="header">
+        <h3>2022年4月
+          <Icon iconName="tou"/>
+        </h3>
+        <div class="main">
+          <div>
+            <span>本月支出</span>
+            <span class="money">￥{{ TotalMonth().outList }}</span>
+            <span>本月收入：{{ TotalMonth().inList }}</span>
           </div>
-          <span>+5000</span>
-        </li>
-      </ul>
+          <div>
+            <span class="year">年度统计 <Icon iconName="leftTou"/></span>
+            <span></span>
+            <span>本月结余：{{ TotalMonth().count }}</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="section" v-for="(time,index) in monthCount()" :key="index">
+        <div class="date">
+          <div>
+            {{ index }}
+          </div>
+          <div class="inLout">
+            <span>{{ '收入:' + inList(time).inList }}</span>
+            <span>{{ "支出：" + inList(time).outList }}</span>
+          </div>
+        </div>
+        <ul class="detailed">
+          <li v-for="(tag,i) in time" :key="i" @click="show(tag)">
+            <div class="remarks">
+              <div class="icon">
+                <Icon :iconName="tag.tags.name"/>
+              </div>
+              <span>{{ tag.tags.title }}</span>
+            </div>
+            <span :class="{inList:tag.type==='inList',outList:tag.type==='outList'}">{{ tag.type==="inList"?`+${tag.amount}`:`-${tag.amount}`}}</span>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
+    <div v-if="display" @click="hide" class="delete">
+      <div class="content1">
+        <div>
+          <span>账单详情</span>
+          <div>
+            <span>修改</span>
+            <span class="deleteText" @click="removeTag">删除</span>
+          </div>
+        </div>
+        <div>
+          <span>金额</span>
+          <span>{{ tag.amount }}}</span>
+        </div>
+        <div>
+          <span>分类</span>
+          <span>{{ tag.tags.title }}</span>
+        </div>
+        <div>
+        <span>
+          日期
+        </span>
+          <span>
+          {{ dataString(tag.createAt) }}
+        </span>
+        </div>
+      </div>
+    </div>
+  </Layout>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
-@Component
+import dayjs from "dayjs";
+import Button from "@/components/Button.vue";
+@Component({
+  components: {Button}
+})
 export default class Count extends Vue {
-    list = 0
+  display=false
+  tag:RecordID|undefined
+  get recordList() {
+    return this.$store.state.recordList;
+  }
+
+  TotalMonth() {
+    const {recordList} = this;
+    const obj: { count: number, inList: number, outList: number } = {count: 0, inList: 0, outList: 0};
+    const date = dayjs(new Date());
+    recordList.filter((time: RecordID) => {
+      if (date.isSame(dayjs(time.createAt), 'month')) {
+        if (time.type === "inList") {
+          obj.inList += time.amount;
+        }
+        if (time.type === "outList") {
+          obj.outList += time.amount;
+        }
+      }
+    });
+    obj.count = obj.inList - obj.outList;
+    return obj;
+  }
+
+  monthCount() {
+    const {recordList} = this;
+    const date = dayjs(new Date());
+    let obj: { [key: string]: RecordID[] } = {};
+    const arr = recordList.map((time: RecordID) => {
+      if (date.isSame(dayjs(time.createAt), 'month')) {
+        const name = dayjs(time.createAt).format('YYYY年MM月DD日');
+        obj[name] = [];
+        return time;
+      }
+    });
+    for (let i = 0; i < arr.length; i++) {
+      for (let key in obj) {
+        const name = dayjs(arr[i].createAt).format('YYYY年MM月DD日');
+        if (key === name) {
+          obj[key].push(arr[i]);
+        }
+      }
+    }
+
+    return obj;
+  }
+
+  inList(value: RecordID[]) {
+    let obj: { inList: number, outList: number } = {inList: 0, outList: 0};
+    value.map((time) => {
+      if (time.type === 'inList') {
+        obj.inList += time.amount;
+      } else {
+        obj.outList += time.amount;
+      }
+    });
+
+    return obj;
+  }
+
+  created() {
+    console.log('出生');
+    this.$store.commit('getRecordList');
+  }
+  show(tag:RecordID){
+    this.tag = tag
+    this.display=true
+  }
+  hide(){
+    this.display=false
+  }
+  removeTag(){
+    this.$confirm('此操作将删除账单, 是否继续?', '提示', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    }).then(() => {
+      console.log(555)
+
+
+
+    }).catch(() => {
+      this.$message({
+        type: 'info',
+        message: '已取消删除'
+      });
+    });
+
+  }
+  dataString(date:string){
+      return dayjs(date).format('YYYY年MM月DD日')
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.parent{
+.parent {
   display: flex;
   flex-direction: column;
   height: 100%;
-  > .header{
+
+  > .header {
     background: #31409f;
     padding: 12px 12px;
     color: #FFFFFF;
-    > h3{
+
+    > h3 {
       padding: 16px 0;
       font-size: 16px;
       display: flex;
       align-items: center;
 
-      > .icon{
+      > .icon {
         margin-left: 8px;
       }
     }
-    >.main{
+
+    > .main {
       display: flex;
       justify-content: space-between;
-      > div{
+
+      > div {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        >span{
+
+        > span {
           margin: 10px 0;
-          &.money{
+          &.money {
             font-size: 30px;
           }
-          &.year{
+
+          &.year {
             text-align: right;
-            > .icon{
+
+            > .icon {
               margin-right: 8px;
             }
           }
@@ -92,35 +225,48 @@ export default class Count extends Vue {
 
     }
   }
-  >.section{
+
+  > .section {
     flex: 1;
     padding: 0 4px;
-    >.date{
+
+    > .date {
       display: flex;
       justify-content: space-between;
       background: #efefef;
       padding: 4px 0;
       font-size: 12px;
       color: #707070;
-      >.inLout{
-        >span{
+
+      > .inLout {
+        > span {
           margin-right: 10px;
         }
       }
     }
-    >.detailed{
+
+    > .detailed {
       padding: 0 10px;
       background: #FFFFFF;
-      >li{
+
+      > li {
         display: flex;
         justify-content: space-between;
         padding: 8px 0;
         margin: 2px 0;
         line-height: 46px;
-        >.remarks{
+        >span.inList{
+          color: darkgreen;
+        }
+        >span.outList{
+          color: red;
+
+        }
+        > .remarks {
           display: flex;
           align-items: center;
-          >div.icon{
+
+          > div.icon {
             width: 46px;
             height: 46px;
             font-size: 24px;
@@ -133,5 +279,35 @@ export default class Count extends Vue {
       }
     }
   }
+}
+
+.delete {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+background: rgba(0,0,0,0.5);
+>.content1{
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  z-index: 50;
+  > div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px;
+    background: #FFFFFF;
+    font-size: 14px;
+    span.deleteText{
+      color: red;
+    }
+    span {
+      display: inline-block;
+      padding: 0 10px;
+    }
+  }
+}
+
 }
 </style>

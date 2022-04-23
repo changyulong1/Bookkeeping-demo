@@ -47,6 +47,7 @@ export default class statistics extends Vue {
       hasList[data]= hasList[data] ||{title:data,list:[]}
       hasList[data].list.push(redList[i])
     }
+    console.log(hasList)
     return hasList
   }
   hasDate(string:string){

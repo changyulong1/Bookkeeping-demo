@@ -1,12 +1,12 @@
 <template>
   <nav>
-    <router-link to="/money" class="time" active-class="selected">
+    <router-link to="/Count" class="time" active-class="selected">
       <Icon iconName="money"/>
-      记账
+      账单
     </router-link>
-    <router-link to="/labels" class="time" active-class="selected">
+    <router-link to="/money" class="time" active-class="selected">
       <Icon iconName="statistics"/>
-      标签
+      记账
     </router-link>
     <router-link to="/statistics" class="time" active-class="selected">
       <Icon iconName="labels" />

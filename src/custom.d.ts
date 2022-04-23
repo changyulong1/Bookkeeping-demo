@@ -7,6 +7,7 @@ type RootState = {
 }
 type IconName = 'inList'|'outList'
 type RecordID = {
+    id?:string
     tags: Tag
     notes: string
     type: string
