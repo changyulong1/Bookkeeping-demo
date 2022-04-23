@@ -11,9 +11,6 @@
 
 <script lang="ts">
 import Top from "@/components/morney/Top.vue";
-import Exegesis from "@/components/morney/Exegesis.vue";
-import Gomoney from "@/components/morney/Gomoney.vue";
-import Buts from "@/components/morney/Buts.vue";
 import {Component} from "vue-property-decorator";
 import Tags from "@/components/Tags.vue";
 import tag2 from "@/consts/tag2";
@@ -21,7 +18,7 @@ import Buttons from "@/components/updataComp/Buttons.vue";
 import Vue from "vue";
 //Modify
 @Component({
-  components: {Buttons, Tags, Buts, Gomoney, Exegesis, Top}
+  components: {Buttons, Tags, Top}
 })
 export default class Modify extends Vue {
   get icons() {

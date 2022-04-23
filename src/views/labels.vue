@@ -23,7 +23,7 @@
       <div class="add">
         <Button @click="path">
           <Icon icon-name="jiahao"/>
-         新增泪飚
+         新增类别
         </Button>
       </div>
     </div>
@@ -34,24 +34,14 @@
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import Button from "@/components/Button.vue";
-import Header from "@/components/Header.vue";
-//账单
-import Count from "@/components/updataComp/Count.vue";
-//添加页
-import Bill from "@/components/updataComp/Bill.vue";
-import SetUp from "@/components/updataComp/setUp.vue";
-import SetTag from "@/components/updataComp/SetTag.vue";
-import CreateTag from "@/components/updataComp/CreateTag.vue";
-import Date from "@/components/updataComp/Dates.vue";
 
 //引入
 import Inout from "@/components/updataComp/Inout.vue";
 import Tags from "@/components/Tags.vue";
 import tag2 from "@/consts/tag2";
 
-
 @Component({
-  components: {Tags, Date, CreateTag, SetTag, SetUp, Bill, Count, Header, Button, Inout}
+  components: {Tags, Button, Inout}
 })
 export default class labels extends Vue {
   iconName = '';
@@ -66,12 +56,6 @@ export default class labels extends Vue {
     this.$store.commit('getLanguage');
   }
 
-  createTag() {
-    const name = window.prompt("请输入标签名");
-    if (name) {
-      this.$store.commit('createTag', name);
-    }
-  }
   remove(id:string){
     this.$store.commit('removeTag', {id:id,iconName:this.iconName})
   }
@@ -80,7 +64,6 @@ export default class labels extends Vue {
     this.$router.push({path:`/labels/SetTag/${id}`,query:{iconName:this.iconName}})
   }
   path(){
-    console.log(55)
     this.$router.push({path:`/labels/Create/${this.iconName}`})
   }
 }

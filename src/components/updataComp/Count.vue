@@ -142,7 +142,6 @@ export default class Count extends Vue {
   }
 
   created() {
-    console.log('出生');
     this.$store.commit('getRecordList');
   }
   show(tag:RecordID){

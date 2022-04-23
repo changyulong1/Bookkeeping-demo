@@ -31,7 +31,6 @@ export default class Tags extends Vue {
     this.$emit('update:value', type);
   }
   path(){
-    console.log(55)
     this.$router.back()
   }
 }
