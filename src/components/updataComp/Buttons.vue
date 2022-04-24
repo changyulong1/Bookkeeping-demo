@@ -134,7 +134,7 @@ export default class Buts extends Vue {
 
 .paentBtu {
   width: 100%;
-  position: fixed;
+  position: absolute;
   margin-left: -14px;
   bottom: 0;
   //display: none;

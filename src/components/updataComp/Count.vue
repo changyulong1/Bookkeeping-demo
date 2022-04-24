@@ -2,8 +2,8 @@
   <Layout>
     <div class="parent">
       <div class="header">
-        <h3>2022年4月
-          <Icon iconName="tou"/>
+        <h3>
+          <Dates :times="createAt" type-name="month" icon-name="xia" @update:time="setTimes"/>
         </h3>
         <div class="main">
           <div>
@@ -12,7 +12,7 @@
             <span>本月收入：{{ TotalMonth().inList }}</span>
           </div>
           <div>
-            <span class="year">年度统计 <Icon iconName="leftTou"/></span>
+            <span class="year"><router-link to="/YearCount">年度统计 <Icon iconName="right"/></router-link></span>
             <span></span>
             <span>本月结余：{{ TotalMonth().count }}</span>
           </div>
@@ -68,6 +68,7 @@
         </span>
         </div>
       </div>
+
     </div>
   </Layout>
 </template>
@@ -77,10 +78,12 @@ import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import dayjs from "dayjs";
 import Button from "@/components/Button.vue";
+import Dates from "@/components/updataComp/Dates.vue";
 @Component({
-  components: {Button}
+  components: {Button,Dates}
 })
 export default class Count extends Vue {
+  createAt = new Date().toISOString()
   display=false
   tag:RecordID|undefined
   get recordList() {
@@ -88,9 +91,10 @@ export default class Count extends Vue {
   }
 
   TotalMonth() {
+
     const {recordList} = this;
     const obj: { count: number, inList: number, outList: number } = {count: 0, inList: 0, outList: 0};
-    const date = dayjs(new Date());
+    const date = dayjs(this.createAt);
     recordList.filter((time: RecordID) => {
       if (date.isSame(dayjs(time.createAt), 'month')) {
         if (time.type === "inList") {
@@ -107,14 +111,17 @@ export default class Count extends Vue {
 
   monthCount() {
     const {recordList} = this;
-    const date = dayjs(new Date());
+    const date = dayjs(this.createAt);
     let obj: { [key: string]: RecordID[] } = {};
-    const arr = recordList.map((time: RecordID) => {
+    let  arr:RecordID[]= [];
+     recordList.map((time: RecordID) => {
       if (date.isSame(dayjs(time.createAt), 'month')) {
         const name = dayjs(time.createAt).format('YYYY年MM月DD日');
         obj[name] = [];
-        return time;
+        console.log(time)
+        arr.push(time)
       }
+      console.log(555)
     });
     for (let i = 0; i < arr.length; i++) {
       for (let key in obj) {
@@ -124,7 +131,6 @@ export default class Count extends Vue {
         }
       }
     }
-
     return obj;
   }
 
@@ -159,8 +165,6 @@ export default class Count extends Vue {
     }).then(() => {
       console.log(555)
         this.$store.commit('removeRecord',)
-
-
     }).catch(() => {
       this.$message({
         type: 'info',
@@ -171,6 +175,12 @@ export default class Count extends Vue {
   }
   dataString(date:string){
       return dayjs(date).format('YYYY年MM月DD日')
+  }
+  setTimes(value:Date){
+    console.log('shijian')
+    console.log(value)
+    this.createAt = value.toISOString()
+
   }
 }
 </script>
@@ -187,13 +197,16 @@ export default class Count extends Vue {
     color: #FFFFFF;
 
     > h3 {
-      padding: 16px 0;
+      padding: 8px 0;
       font-size: 16px;
       display: flex;
+      width: 100px;
       align-items: center;
-
       > .icon {
-        margin-left: 8px;
+        //margin-left: 8px;
+      }
+      >.date{
+        border: 1px solid red;
       }
     }
 
@@ -214,9 +227,13 @@ export default class Count extends Vue {
 
           &.year {
             text-align: right;
-
-            > .icon {
-              margin-right: 8px;
+            >a{
+              color: #FFFFFF;
+              > .icon {
+                margin-right: 8px;
+                color: #FFFFFF;
+                font-size: 18px;
+              }
             }
           }
         }
@@ -226,7 +243,7 @@ export default class Count extends Vue {
   }
 
   > .section {
-    flex: 1;
+    //flex: 1;
     padding: 0 4px;
 
     > .date {

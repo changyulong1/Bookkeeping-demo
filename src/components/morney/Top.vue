@@ -65,6 +65,7 @@ export default class Top extends Vue {
 @import "~@/assets/style/font.scss";
 
 .tagList {
+  margin: 0 auto;
   ul {
     @extend %clearfix;
     overflow: auto;

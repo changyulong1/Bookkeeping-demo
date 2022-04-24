@@ -8,7 +8,7 @@ import SetTag from "@/components/updataComp/SetTag.vue";
 import createTag from "@/components/updataComp/CreateTag.vue";
 import Count from "@/components/updataComp/Count.vue";
 import Modify from "@/components/Modify.vue";
-///hyu
+import YearCount from "@/components/yearCount.vue";
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
@@ -43,6 +43,10 @@ const routes: Array<RouteConfig> = [
   {
     path:"/Modify/:id",
     component:Modify
+  },
+  {
+    path:"/YearCount",
+    component:YearCount
   },
   {
     path:"*",

@@ -45,6 +45,7 @@ export default class Tags extends Vue {
   font-size: 16px;
   background: #fdfdfd;
   margin-bottom: 1px;
+  width: 100%;
   > span.icon {
     fill: #31409f;
     margin-left: 10px;

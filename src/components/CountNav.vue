@@ -1,17 +1,14 @@
 <template>
-  <div class="block"  :class="{month:typeName}" >
+  <div class="block" :class="{warp:Mask}">
     <el-date-picker
         v-model="value"
-        :type="type"
-        format="yyyy年"
+        type="date"
+        format="M月dd日"
         ref="date"
         @blur="hide"
         placeholder="选择日期">
     </el-date-picker>
-    <Icon :iconName="iconName"/>
-    <div class="Mask" @click.stop.prevent="displayHide"
-         :class="{warp:Mask}"
-    ></div>
+    <div class="Mask" @click.stop.prevent="displayHide"></div>
   </div>
 </template>
 
@@ -21,24 +18,13 @@ import {Component, Prop, Ref} from "vue-property-decorator";
 
 @Component
 export default class Dates extends Vue {
-  type='date'
   @Prop(String) times!:string
-  @Prop(String) typeName!:string
-  @Prop(String) iconName!:string
-  @Prop(String) format!:string
   value = new Date()
   Mask = false
   Hide = false
-  formatStr= 'M月dd日'
   @Ref('date')  input !:HTMLInputElement
 
   created() {
-    if(this.type){
-      console.log(this.typeName)
-      this.type=this.typeName
-      console.log(this.type)
-    }
-
     this.$emit('update:time', this.value)
   }
   displayHide(){
@@ -66,6 +52,7 @@ export default class Dates extends Vue {
 
   > div.el-date-editor {
     width: 100%;
+
     > input.el-input__inner {
       text-align: center;
       padding: 0;
@@ -81,8 +68,6 @@ export default class Dates extends Vue {
     > span {
       display: none;
     }
-
-
   }
 
   > .Mask {
@@ -92,36 +77,29 @@ export default class Dates extends Vue {
     position: absolute;
     top: 0;
     z-index: 10;
-    &.warp {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 100;
-    }
-  }
-  &.month{
-    display: flex;
-    align-items: center;
-    > div.el-date-editor{
-      > input.el-input__inner{
-        color: #FFFFFF;
-      }
-    }
   }
 
+  &.warp {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+  }
 }
 
 body {
 
   .el-picker-panel {
+
     margin: 15px 0;
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%);
+
     > .popper__arrow {
       display: none;
     }
