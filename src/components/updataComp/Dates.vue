@@ -1,9 +1,10 @@
 <template>
-  <div class="block"  :class="{month:typeName}" >
+  <div class="block"  :class="{month:typeName==='month'||typeName==='year'}" >
     <el-date-picker
+        :editable="false"
         v-model="value"
         :type="type"
-        format="yyyy年"
+        :format="format"
         ref="date"
         @blur="hide"
         placeholder="选择日期">
@@ -21,22 +22,21 @@ import {Component, Prop, Ref} from "vue-property-decorator";
 
 @Component
 export default class Dates extends Vue {
-  type='date'
+  type='month'
+  format='yyyy年M月'
   @Prop(String) times!:string
   @Prop(String) typeName!:string
   @Prop(String) iconName!:string
-  @Prop(String) format!:string
+  @Prop(String) formatName!:string
   value = new Date()
   Mask = false
   Hide = false
-  formatStr= 'M月dd日'
   @Ref('date')  input !:HTMLInputElement
 
   created() {
-    if(this.type){
-      console.log(this.typeName)
+    if(this.typeName){
       this.type=this.typeName
-      console.log(this.type)
+      this.format = this.formatName
     }
 
     this.$emit('update:time', this.value)

@@ -10,7 +10,7 @@
         <button @click="input">2</button>
         <button @click="input">3</button>
         <button>
-          <Dates :times="createAt" @update:time="setTimes"/>
+          <Dates :times="createAt" @update:time="setTimes" format-name="MM月D日" type-name="date"/>
         </button>
         <button @click="input">4</button>
         <button @click="input">5</button>

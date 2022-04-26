@@ -3,8 +3,8 @@
     <div class="parent">
       <div class="header">
         <h3>
-          <Icon iconName="left"/>
-          <Dates :times="createAt" type-name="year" format="yyyy年" @update:time="setTimes" icon-name="xia"/>
+          <span @click="to"><Icon  iconName="left"/></span>
+          <Dates :times="createAt" type-name="year" format-name="yyyy年" @update:time="setTimes" icon-name="xia"/>
         </h3>
         <div class="main">
           <div>
@@ -99,7 +99,6 @@ export default class yearCount extends Vue {
         }
       }
     }
-    console.log(obj);
     return obj;
   }
 
@@ -144,6 +143,9 @@ export default class yearCount extends Vue {
     this.createAt = value.toISOString();
 
   }
+  to(){
+    this.$router.back()
+  }
 }
 </script>
 
@@ -163,7 +165,9 @@ export default class yearCount extends Vue {
       display: flex;
       width: 100px;
       align-items: center;
-
+      sapn {
+        border: 1px solid red;
+      }
       > .icon {
         //margin-left: 8px;
       }

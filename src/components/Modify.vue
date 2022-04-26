@@ -4,6 +4,7 @@
      <Tags icon-name="left" :arry="iconType" :value.sync="record.type"></Tags>
      <Top :record="getRecord" class="icon-error" :iconlist.sync="icons"
           :iconType ="record.type"
+          show-boolen="false"
           @updata:getTime="getTime"/>
      <Buttons :record="getRecord"  @updata:ok="getok" @updata:recordList="updataList"/>
    </Layout>
@@ -48,11 +49,6 @@ export default class Modify extends Vue {
   getTime(value:{id:string,name:string,title:string}) {
     value?this.show = true:this.show = false
     this.record.tags=value
-  }
-
-  getValue(value: string) {
-    this.record.notes = value;
-
   }
 
   getok(value:{amount: number,notes: string,createAt:Date}) {

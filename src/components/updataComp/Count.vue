@@ -118,10 +118,8 @@ export default class Count extends Vue {
       if (date.isSame(dayjs(time.createAt), 'month')) {
         const name = dayjs(time.createAt).format('YYYY年MM月DD日');
         obj[name] = [];
-        console.log(time)
         arr.push(time)
       }
-      console.log(555)
     });
     for (let i = 0; i < arr.length; i++) {
       for (let key in obj) {
@@ -163,7 +161,6 @@ export default class Count extends Vue {
       cancelButtonText: '取消',
       type: 'warning'
     }).then(() => {
-      console.log(555)
         this.$store.commit('removeRecord',)
     }).catch(() => {
       this.$message({
@@ -177,8 +174,6 @@ export default class Count extends Vue {
       return dayjs(date).format('YYYY年MM月DD日')
   }
   setTimes(value:Date){
-    console.log('shijian')
-    console.log(value)
     this.createAt = value.toISOString()
 
   }

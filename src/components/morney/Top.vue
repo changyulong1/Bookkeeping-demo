@@ -9,7 +9,7 @@
         </div>
         <span>{{ time.title }}</span>
       </li>
-      <li @click="edit">
+      <li @click="edit" v-if="show">
         <div>
           <Icon :icon-name="setName"/>
         </div>
@@ -30,12 +30,17 @@ export default class Top extends Vue {
   name = '';
   setName = 'shezhi';
   setTitle = '自定义';
+  show=true
   @Prop() iconType: string | undefined;
   @Prop() readonly record?:RecordID
   @Prop() readonly iconlist: string[] | undefined;
+  @Prop() readonly showBoolen:boolean | undefined
  created(){
    if(this.record){
      this.name=this.record.tags.title
+   }
+   if(this.showBoolen){
+     this.show=false
    }
  }
   witch(time: { id: string, name: string, title: string }) {
