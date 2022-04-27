@@ -44,7 +44,6 @@ export default class Top extends Vue {
    }
  }
   witch(time: { id: string, name: string, title: string }) {
-
     if (this.name === time.title) {
       this.name = '';
       this.$emit('updata:getTime');
