@@ -19,57 +19,62 @@
         </div>
 
       </div>
-      <div class="section" v-for="(time,index) in monthCount()" :key="index">
-        <div class="date">
-          <div>
-            {{ index }}
-          </div>
-          <div class="inLout">
-            <span>{{ '收入:' + inList(time).inList }}</span>
-            <span>{{ "支出：" + inList(time).outList }}</span>
-          </div>
-        </div>
-        <ul class="detailed">
-          <li v-for="(tag,i) in time" :key="i" @click="show(tag)">
-            <div class="remarks">
-              <div class="icon">
-                <Icon :iconName="tag.tags.name"/>
-              </div>
-              <span>{{ tag.tags.title }}</span>
-            </div>
-            <span :class="{inList:tag.type==='inList',outList:tag.type==='outList'}">{{ tag.type==="inList"?`+${tag.amount}`:`-${tag.amount}`}}</span>
-          </li>
-        </ul>
-      </div>
+    <div class="countContent">
+     <div class="section">
+       <div  v-for="(time,index) in monthCount()" :key="index">
+         <div class="date">
+           <div>
+             {{ index }}
+           </div>
+           <div class="inLout">
+             <span>{{ '收入:' + inList(time).inList }}</span>
+             <span>{{ "支出：" + inList(time).outList }}</span>
+           </div>
+         </div>
+         <ul class="detailed">
+           <li v-for="(tag,i) in time" :key="i" @click="show(tag)">
+             <div class="remarks">
+               <div class="icon">
+                 <Icon :iconName="tag.tags.name"/>
+               </div>
+               <span>{{ tag.tags.title }}</span>
+             </div>
+             <span :class="{inList:tag.type==='inList',outList:tag.type==='outList'}">{{ tag.type==="inList"?`+${tag.amount}`:`-${tag.amount}`}}</span>
+           </li>
+         </ul>
+       </div>
+     </div>
     </div>
-    <div v-if="display" @click="hide" class="delete">
-      <div class="content1">
-        <div>
-          <span>账单详情</span>
+      <div v-if="display" @click="hide" class="delete">
+        <div class="content1">
           <div>
-            <span><router-link :to="`/Modify/${tag.id}`">修改</router-link></span>
-            <span class="deleteText" @click="removeTag(tag.id)">删除</span>
+            <span>账单详情</span>
+            <div>
+              <span><router-link :to="`/Modify/${tag.id}`">修改</router-link></span>
+              <span class="deleteText" @click="removeTag(tag.id)">删除</span>
+            </div>
           </div>
-        </div>
-        <div>
-          <span>金额</span>
-          <span>{{ tag.amount }}}</span>
-        </div>
-        <div>
-          <span>分类</span>
-          <span>{{ tag.tags.title }}</span>
-        </div>
-        <div>
+          <div>
+            <span>金额</span>
+            <span>{{ tag.amount }}}</span>
+          </div>
+          <div>
+            <span>分类</span>
+            <span>{{ tag.tags.title }}</span>
+          </div>
+          <div>
         <span>
           日期
         </span>
-          <span>
+            <span>
           {{ dataString(tag.createAt) }}
         </span>
+          </div>
         </div>
+        <div class="Mask"></div>
       </div>
-
     </div>
+
   </Layout>
 </template>
 
@@ -236,89 +241,99 @@ export default class Count extends Vue {
 
     }
   }
-
-  > .section {
-    //flex: 1;
-    padding: 0 4px;
-
-    > .date {
-      display: flex;
-      justify-content: space-between;
-      background: #efefef;
-      padding: 4px 0;
-      font-size: 12px;
-      color: #707070;
-
-      > .inLout {
-        > span {
-          margin-right: 10px;
-        }
-      }
-    }
-
-    > .detailed {
-      padding: 0 10px;
-      background: #FFFFFF;
-
-      > li {
+>.countContent{
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  >.section{
+    flex: 1;
+    overflow: auto;
+    >div {
+      //flex: 1;
+      padding: 0 4px;
+      > .date {
         display: flex;
         justify-content: space-between;
-        padding: 8px 0;
-        margin: 2px 0;
-        line-height: 46px;
-        >span.inList{
-          color: darkgreen;
+        background: #efefef;
+        padding: 4px 0;
+        font-size: 12px;
+        color: #707070;
+        > .inLout {
+          > span {
+            margin-right: 10px;
+          }
         }
-        >span.outList{
-          color: red;
+      }
 
-        }
-        > .remarks {
+      > .detailed {
+        padding: 0 10px;
+        background: #FFFFFF;
+
+        > li {
           display: flex;
-          align-items: center;
+          justify-content: space-between;
+          padding: 8px 0;
+          margin: 2px 0;
+          line-height: 46px;
+          >span.inList{
+            color: darkgreen;
+          }
+          >span.outList{
+            color: red;
 
-          > div.icon {
-            width: 46px;
-            height: 46px;
-            font-size: 24px;
-            text-align: center;
-            border-radius: 100%;
-            margin-right: 12px;
-            background: #dedede;
+          }
+          > .remarks {
+            display: flex;
+            align-items: center;
+
+            > div.icon {
+              width: 46px;
+              height: 46px;
+              font-size: 24px;
+              text-align: center;
+              border-radius: 100%;
+              margin-right: 12px;
+              background: #dedede;
+            }
           }
         }
       }
     }
   }
-}
 
-.delete {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-background: rgba(0,0,0,0.5);
->.content1{
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
-  z-index: 50;
-  > div {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 10px;
-    background: #FFFFFF;
-    font-size: 14px;
-    span.deleteText{
-      color: red;
+}
+ >.delete {
+   width: 100%;
+    >.content1{
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      z-index: 50;
+      padding: 0;
+      > div {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 10px;
+        background: #FFFFFF;
+        font-size: 14px;
+        span.deleteText{
+          color: red;
+        }
+        span {
+          display: inline-block;
+          padding: 0 10px;
+        }
+      }
     }
-    span {
-      display: inline-block;
-      padding: 0 10px;
+    >.Mask{
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
     }
   }
 }
 
-}
 </style>

@@ -5,7 +5,7 @@
       账单
     </router-link>
     <router-link to="/money" class="time" active-class="selected">
-      <Icon iconName="statistics"/>
+      <Icon iconName="jizhang"/>
       记账
     </router-link>
     <router-link to="/statistics" class="time" active-class="selected">

@@ -28,7 +28,7 @@ export default class Dates extends Vue {
   @Prop(String) typeName!:string
   @Prop(String) iconName!:string
   @Prop(String) formatName!:string
-  value = new Date()
+  value = new Date().toISOString()
   Mask = false
   Hide = false
   @Ref('date')  input !:HTMLInputElement

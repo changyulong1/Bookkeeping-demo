@@ -152,9 +152,9 @@ export default class labels extends Vue {
   > .add {
     display: flex;
     justify-content: center;
-    position: fixed;
+    position: absolute;
     width: 100%;
-    padding: 6px 0;
+    padding: 14px 0;
     bottom: 0;
     z-index: 10;
     background: #f0eeef;

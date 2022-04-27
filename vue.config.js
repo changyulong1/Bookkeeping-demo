@@ -4,7 +4,7 @@ const path = require("path")
 
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
-      ? '/deom2-wangcai/'
+      ? '/Bookkeeping/'
       : '/',
   lintOnSave: false,
   chainWebpack: config => {

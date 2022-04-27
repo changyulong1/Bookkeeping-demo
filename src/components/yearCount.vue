@@ -165,15 +165,6 @@ export default class yearCount extends Vue {
       display: flex;
       width: 100px;
       align-items: center;
-      sapn {
-        border: 1px solid red;
-      }
-      > .icon {
-        //margin-left: 8px;
-      }
-      > .date {
-        //border: 1px solid red;
-      }
     }
 
     > .main {
@@ -187,7 +178,6 @@ export default class yearCount extends Vue {
 
         > span {
           margin: 10px 0;
-
           &.money {
             font-size: 30px;
           }
@@ -207,9 +197,9 @@ export default class yearCount extends Vue {
     }
   }
   > .section {
-    //flex: 1;
+    flex: 1;
     padding: 0 4px;
-
+    overflow: auto;
     > div {
       > p {
         display: flex;
