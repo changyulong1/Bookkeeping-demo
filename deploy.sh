@@ -22,5 +22,5 @@ git remote add origin git@github.com:changyulong1/Bookkeeping.git
 
 # 部署到 https://<USERNAME>.github.io/<REPO>
 # git push -f git@github.com:changyulong1/deom2-wangcai.git master:gh-pages
-git push -u origin master
+git push -f origin master
 cd -
