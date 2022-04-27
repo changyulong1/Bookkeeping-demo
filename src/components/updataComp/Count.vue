@@ -74,7 +74,6 @@
         <div class="Mask"></div>
       </div>
     </div>
-
   </Layout>
 </template>
 

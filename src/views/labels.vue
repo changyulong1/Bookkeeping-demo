@@ -20,12 +20,12 @@
           </li>
         </ul>
       </div>
-      <div class="add">
-        <Button @click="path">
-          <Icon icon-name="jiahao"/>
-         新增类别
-        </Button>
-      </div>
+    </div>
+    <div class="add">
+      <Button @click="path">
+        <Icon icon-name="jiahao"/>
+        新增类别
+      </Button>
     </div>
   </layout>
 </template>
@@ -148,21 +148,19 @@ export default class labels extends Vue {
       }
     }
   }
-
-  > .add {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    width: 100%;
-    padding: 14px 0;
-    bottom: 0;
-    z-index: 10;
-    background: #f0eeef;
-
-    > .button {
-      color: #000050;
-    }
-
+}
+.add {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  padding: 14px 0;
+  bottom: 0;
+  z-index: 20;
+  background: #f0eeef;
+  >.button {
+    color: #000050;
   }
+
 }
 </style>
