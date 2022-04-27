@@ -125,7 +125,7 @@ export default class Buts extends Vue {
     this.outMoney = "0";
   }
   setTimes(value:Date){
-    this.createAt = value.toString()
+    this.createAt = value.toISOString()
   }
 }
 </script>
